@@ -367,3 +367,101 @@ html {
     color: #000000;
     padding: 5px;
 }
+
+.shopping-cart {
+    margin-top: 150px;
+}
+
+.header-cart {
+    display: block;
+}
+
+.name-order,
+.quantities-product,
+.price-product {
+    padding: 15px;
+    width: 30%;
+    display: inline-block;
+    text-align: right;
+}
+
+
+.price-product {
+    text-align: center;
+}
+
+.order-book {
+    display: block;
+}
+
+
+.order-title,
+.order-count,
+.order-price {
+    display: inline-block;
+    width: 20%;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+td,
+th {
+    padding: 10px;
+}
+
+tr {
+    border-bottom: 0.3px solid rgb(156, 151, 151);
+}
+
+.td-1 {
+    width: 20%;
+}
+
+.count-order {
+    width: 50px;
+    height: 25px;
+    text-align: center;
+    padding-left: 14px;
+}
+
+.footer-cart {
+    display: block;
+}
+
+.row-1,
+.row-2 {
+    width: 45%;
+    display: inline-block;
+}
+
+.row-1 textarea {
+    resize: none;
+}
+
+.row-2 {
+    text-align: center;
+    float: right;
+    padding: 30px;
+}
+
+.row-2 button {
+    border: none;
+    width: 200px;
+    height: 50px;
+    color: white;
+    font-size: 17px;
+    border-radius: 5px;
+    background-color: rgb(6, 140, 140);
+    padding: 0px 10px;
+    cursor: pointer;
+}
+
+.row-1 a {
+    display: inline-block;
+    text-decoration: none;
+    margin-top: 30px;
+}

@@ -30,8 +30,8 @@ const getDetailPage = async (req, res) => {
 }
 
 const getCartPage = async (req, res) => {
-
-    return res.render('cartPage.ejs');
+    const books = await Books.find({});
+    return res.render('cartPage.ejs', { books: books });
 }
 
 module.exports = {

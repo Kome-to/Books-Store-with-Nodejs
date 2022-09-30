@@ -4,9 +4,80 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="/styles/homePage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Book Store</title>
 </head>
 <body>
-    
+        <div class="header">
+            <div class="logo-page">
+                <a href="/">
+                    <img src="/images/logo.webp" alt="logo" width="50px" style="border-radius: 10px;">
+                <div class="name-page">Book Store</div>
+                </a>
+            </div>
+            <div class="nav-bar">
+                <ul class="nav-menu">
+                    <li class="active"><a href="/" class="">Home</a></li>
+                    <li><a href="/books" class="">Books</a></li>
+                    <li><a href="/about" class="">About</a></li>
+                </ul>
+            </div>
+            <div class="sub-nav">
+                <div class="login-text"><a href="/login">Log in</a></div>
+                <div class="login">
+                    <a href="/login"><i class="fa-solid fa-user"></i></a>
+                </div>
+                <div class="cart">
+                    <a href="/user/cart"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <span class="count-book-cart">0</span>
+                </div>
+        </div>
+        </div>
+
+        <div class="container shopping-cart">
+            <h1>Shopping Cart</h1>
+            <br><hr>
+            <table>
+                <tr>
+                 <th></th>
+                  <th>Name product</th>
+                  <th>Quantities</th>
+                  <th>Price</th>
+                  <th></th>
+                </tr>
+                <% for (let i =0; i <4;  i++ ) { %>
+                <tr>
+                    <td class="td-1"><img src="<%= books[i].image%>" width="55px" alt=""></td>
+                  <td class="td-2">Alfreds Futterkiste</td>
+                  <td class="td-3"><input type="number" class="count-order" value="1" min="1"></td>
+                  <td class="td-4">100$</td>
+                  <td class="td-5"><a href="#">Remove</a></td>
+                </tr>
+                <% } %> 
+                <tr style="border: none;font-size:20px;font-weight:700">
+                    <td></td>
+                    <td></td>
+                    <td>Total: </td>
+                    <td>1000$</td>
+                    <td></td>
+                </tr >
+              </table>          
+              <div class="footer-cart">
+                <div class="row-1">
+                    <p>Note: </p><br>
+                    <textarea name="" id="" cols="50" rows="4"></textarea>
+                    <p><i class="fa fa-thin fa-left"></i></i><a href="">Buy More</a></p>
+                </div>
+                <div class="row-2">
+                    <button>Continue to checkout</button>
+                </div>
+              </div>
+        </div>
+        <div class="footer">
+                
+        </div>
 </body>
+<script src="https://kit.fontawesome.com/9bcb66184c.js" crossorigin="anonymous"></script>
+<script src="/scripts/homePage.js"></script>
 </html>
