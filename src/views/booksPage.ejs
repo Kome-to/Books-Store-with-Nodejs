@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/books.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-page">
+            <a href="/">
+                <img src="/images/logo.webp" alt="logo" width="50px" style="border-radius: 10px;">
+            <div class="name-page" style="font-weight: 500;">Book Store</div>
+            </a>
+        </div>
+        <div class="nav-bar">
+            <ul class="nav-menu">
+                <li ><a href="/" class="">Home</a></li>
+                <li class="active"><a href="/books" class="">Books</a></li>
+                <li><a href="/about" class="">About</a></li>
+            </ul>
+        </div>
+        <div class="sub-nav">
+                <div class="login-text"><a href="/login">Log in</a></div>
+                <div class="login">
+                    <a href="/login"><i class="fa-solid fa-user"></i></a>
+                </div>
+                <div class="cart">
+                    <a href="/user/cart"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <span class="count-book-cart">0</span>
+                </div>
+        </div>
+    </div>
+    <div class="wrap">
+        <div class="search">
+           <input type="text" class="searchTerm" placeholder="What are you looking for?">
+           <button type="submit" class="searchButton">
+             <i class="fa fa-search"></i>
+          </button>
+        </div>
+     </div>
+     <!-- <hr style="margin-top: 200px;width: 70%;margin-left: auto;margin-right: auto;"> -->
+    <div class="container">
+        
+         <div class="row-1">
+            <div class="sub-1">
+                <div class="title-row-1">Genres</div>
+                <ul class="genres">
+                    <li><a href="#">Light Novel</a></li>
+                    <li><a href="#">Manga</a></li>
+                    <li><a href="#">Novel</a></li>
+                    <li><a href="#">Historical Fiction</a></li>
+                    <li><a href="#">Romance</a></li>
+                    <li><a href="#">Science Fiction</a></li>
+                    <li><a href="#">Short Stories</li>
+                    <li>Suspense and Thrillers</li>
+                    <li>Cookbooks</a></li>
+                    <li><a href="#">Self-Help</a></li>
+                </ul>
+            </div>
+
+            <div class="sub-1">
+                <div class="title-row-1">Price</div>
+                <ul class="prices">
+                    <li><a href="#">5 - 25 $</a></li>
+                    <li><a href="#">25 - 40 $</a></li>
+                    <li><a href="#">40 - 55 $</a></li>
+                    <li><a href="#">55 - 70 $</a></li>
+                    <li><a href="#">70 - 85 $</a></li>
+                    <li><a href="#">85 - 100 $</a></li>
+                </ul>
+            </div>
+         </div>
+         
+
+         <div class="row-3">
+            <div class="title-row-3">Books</div>
+            <div class="books">
+                <% for (let i =0; i <10;  i++ ) { %>
+                    <div class="book">
+                        <div class="img"><img src="<%= books[i].image%>" alt="" ></div>
+                        <div class="title-book"><%=books[i].title%></div>
+                        <div class="rating">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                        <div class="price-book">100$</div>
+                    </div>
+                <% } %>
+            </div>
+         </div>
+    </div>
+</body>
+<script src="https://kit.fontawesome.com/9bcb66184c.js" crossorigin="anonymous"></script>
+</html>

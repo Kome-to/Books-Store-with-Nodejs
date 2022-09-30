@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/homePage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-page">
+            <a href="/">
+                <img src="/images/logo.webp" alt="logo" width="50px" style="border-radius: 10px;">
+            <div class="name-page" style="font-weight: 500;">Book Store</div>
+            </a>
+        </div>
+        <div class="nav-bar">
+            <ul class="nav-menu">
+                <li class="active"><a href="/" class="">Home</a></li>
+                <li><a href="/books" class="">Books</a></li>
+                <li><a href="/about" class="">About</a></li>
+            </ul>
+        </div>
+        <div class="sub-nav">
+            <div class="login-text"><a href="/login">Log in</a></div>
+            <div class="login">
+                <a href="/login"><i class="fa-solid fa-user"></i></a>
+            </div>
+            <div class="cart">
+                <a href="/user/cart"><i class="fa-solid fa-cart-shopping"></i></a>
+                <span class="count-book-cart">0</span>
+            </div>
+    </div>
+
+    <div class="container detail-book">
+        <div class="link-arrow">
+            <a href="#">Home</a>
+            >
+            <a href="#">Books</a>
+            >
+            <a href="#"><%= book.title%></a>
+        </div>
+        <br><br><br>
+        <div class="detail">
+            <div class="img-detail">
+                <img src="<%= book.image%>" alt="">
+            </div>
+            <div class="description-detail">
+                <div class="title-detail"><%= book.title%></div>
+                <br>
+                <div class="SKU-detail">SKU: <%= book._id%></div>
+                <br>
+                <div class="Prices-detail">100$</div>
+                <br>
+                <div class="author-detail">Author: <%= book.author%></div>
+                <br>
+                <div class="genres-detail">Genres: <%= book.genres%></div>
+                <br>
+                <div class="overview-detail">Overview: <br> <br>
+                    <%= book.description%></div>
+                <br>
+                <hr>
+            </div>            
+        </div>
+        
+        <div class="count-and-add">
+            <div class="count">
+                <div class="decrease-count">-</div>
+                <div class="number-count">0</div>
+                <div class="increase-count">+</div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <div class="add-to-cart">
+                <button>ADD TO CART</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://kit.fontawesome.com/9bcb66184c.js" crossorigin="anonymous"></script>
+<script src="/scripts/homePage.js"></script>
+</html>

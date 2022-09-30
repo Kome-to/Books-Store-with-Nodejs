@@ -1,0 +1,369 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.checked {
+    color: rgb(215, 215, 58);
+}
+
+
+html {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f2f2f2;
+    ;
+}
+
+.header {
+    position: fixed;
+    top: 0%;
+    width: 100%;
+    display: block;
+    height: 80px;
+    border-bottom: 2px solid black;
+    background-color: white;
+    z-index: 1000;
+}
+
+.logo-page {
+    position: absolute;
+    left: 8%;
+    padding: 15px;
+    width: 40%;
+    display: inline-block;
+}
+
+.logo-page a {
+    text-decoration: none;
+    display: inline-block;
+}
+
+.name-page {
+    color: black;
+    position: absolute;
+    padding: 10px;
+    display: inline-block;
+    font-size: 25px;
+}
+
+.nav-bar {
+    position: absolute;
+    display: inline-block;
+    height: 100%;
+    width: 60%;
+    right: 0px;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.sub-nav {
+    font-size: 20px;
+    position: absolute;
+    display: inline-block;
+    right: 8%;
+    width: 20%;
+    top: 35%;
+    text-align: center;
+}
+
+.sub-nav i {
+    display: block;
+    margin: auto;
+    height: 100%;
+}
+
+.sub-nav a {
+    text-decoration: none;
+    color: black;
+}
+
+.count-book-cart {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    border-radius: 90px;
+    font-size: 14px;
+    padding: 4px;
+    background-color: rgb(242, 242, 242);
+}
+
+.login-text,
+.login,
+.cart {
+    position: relative;
+    height: 100%;
+    display: inline-block;
+    padding: 0px 10px;
+}
+
+.login-text {
+    padding-right: 0px !important;
+    font-size: 16px;
+}
+
+.nav-menu {
+    height: 100%;
+}
+
+.nav-menu li {
+    position: relative;
+    display: inline-block;
+    padding: 0px 20px;
+    list-style: none;
+    line-height: 78px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: black;
+}
+
+.active {
+    background-color: #00B4CC;
+    border-radius: 4px;
+}
+
+.container {
+    width: 70%;
+    margin: auto;
+}
+
+.new-release,
+.best-seller {
+    position: relative;
+    top: 100px;
+    margin: 20px 0px;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+
+.new-release a,
+.best-seller a {
+    width: 10%;
+    color: white;
+    text-align: center;
+    display: block;
+    margin: 10px auto;
+    text-decoration: none;
+    padding: 10px;
+    background-color: #00B4CC;
+    border-radius: 10px;
+}
+
+.books {
+    margin: 20px 0px;
+    text-align: left;
+}
+
+.book {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    width: 22%;
+    height: 100%;
+    /* float: left; */
+    padding: 4px;
+    margin: 13.5px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+
+.img img {
+    width: 180px;
+    height: 250px;
+    padding: 10px;
+}
+
+.best-seller {
+    width: 100%;
+    top: 150px;
+}
+
+.footer {
+    height: 200px;
+    background-color: black;
+    margin-top: 150px;
+}
+
+.login-pane {
+    display: block;
+    margin: 200px auto;
+    width: 20%;
+    height: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #00B4CC;
+    text-align: center;
+    /* border: 1px solid rgb(0, 0, 0); */
+}
+
+.register-pane {
+    display: block;
+    margin: 150px auto;
+    width: 30%;
+    height: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #00B4CC;
+    text-align: center;
+}
+
+.username-field,
+.password-field {
+
+    padding: 10px;
+}
+
+.username-field label,
+.password-field label {
+    display: block;
+    text-align: left;
+    font-size: 25px;
+    left: -10px;
+}
+
+.username-field input,
+.password-field input {
+    width: 100%;
+    height: 30px;
+    font-size: 20px;
+}
+
+.footer-login {
+    padding-top: 18px;
+    width: 100%;
+    text-align: right;
+}
+
+.submit-login {
+    color: white;
+    background-color: #000100;
+    border-radius: 10px;
+    padding: 8px 14px;
+    border: none;
+    font-size: 16px;
+    display: inline-block;
+}
+
+.login-pane a {
+    padding-right: 10px;
+    padding-left: 35px;
+    display: inline-block;
+}
+
+.register-pane .footer-login {
+    text-align: center;
+}
+
+.hidden-action {
+    display: none;
+}
+
+.action-hover {
+    position: absolute;
+
+    top: 100px;
+    left: -4px;
+}
+
+.action-hover i {
+    padding: 10px;
+    font-size: 20px;
+    display: block;
+}
+
+.detail-book {
+    margin-top: 100px;
+    position: relative;
+}
+
+.img-detail {
+    display: inline-block;
+    width: 30%;
+}
+
+.description-detail {
+    position: absolute;
+    margin-left: 40px;
+    /* top: 128px; */
+    display: inline-block;
+    width: 65%;
+    height: 100%;
+}
+
+.title-detail {
+    font-size: 35px;
+}
+
+.count-and-add {
+    display: block;
+}
+
+.count {
+    display: block;
+    width: 10%;
+    position: relative;
+    margin: 23px 103px;
+}
+
+.decrease-count,
+.number-count,
+.increase-count {
+    position: absolute;
+    display: inline-block;
+    width: 40%;
+    height: 40px;
+    padding: 10px 10px;
+    background-color: #0a181a;
+    text-align: center;
+    color: white;
+}
+
+.decrease-count {
+    left: -42.5px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+
+.increase-count {
+    left: 42.5px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.increase-count:hover,
+.decrease-count:hover {
+    background-color: #4b4b4b;
+}
+
+.add-to-cart {
+    display: block;
+    width: 150px;
+    height: 40px;
+    margin: 0px 46px;
+}
+
+.add-to-cart button {
+    background-color: #00B4CC;
+    width: 150px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.link-arrow a {
+    text-decoration: none;
+    color: #000000;
+    padding: 5px;
+}
