@@ -231,10 +231,10 @@ body {
 }
 
 .title-row-1 {
-    width: 40%;
+    width: 96%;
     margin: auto;
     text-align: center;
-    border-bottom: 1px solid black;
+    border-bottom: 2px solid black;
     font-size: 20px;
     padding-bottom: 10px;
     margin-bottom: 10px;
@@ -246,8 +246,9 @@ body {
 }
 
 .genres li,
-.prices {
+.prices li {
     line-height: 30px;
+    border-bottom: 0.6px solid rgb(180, 175, 175);
 }
 
 .sub-1 {
@@ -271,3 +272,134 @@ body {
 .title-row-3 {
     font-weight: 600;
 }
+
+.book {
+    position: relative;
+    cursor: pointer;
+}
+
+.hidden-action {
+    /* display: none; */
+}
+
+.action-hover {
+    position: absolute;
+    top: 100px;
+    left: -4px;
+}
+
+.action-hover i {
+    cursor: pointer;
+    padding: 10px;
+    font-size: 20px;
+    display: block;
+}
+
+.book:hover {
+    top: -10px;
+    box-shadow: 5px 5px #00B4CC;
+}
+
+.action-hover i {
+    padding: 10px;
+    font-size: 16px;
+    display: block;
+    background-color: #00B4CC;
+    border-radius: 100%;
+    margin-top: 5px;
+}
+
+.action-hover i:hover {
+    background-color: #016d7b;
+}
+
+.hidden-action {
+    display: none;
+}
+
+
+/* Modal add product to cart */
+.modal-add-product-to-cart {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    border-radius: 10px;
+    position: absolute;
+    width: 30%;
+    height: 40%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(255, 255, 255);
+    padding: 16px;
+    text-align: center;
+}
+
+.modal-content img {
+    display: inline-block;
+    height: 280px;
+    border-radius: 10px;
+}
+
+.modal-content img:hover {
+    height: 282px;
+    border-radius: 10px;
+}
+
+.description-product {
+    position: relative;
+    float: right;
+    width: 50%;
+    height: 50%;
+}
+
+.modal-content .title {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 10px 0px;
+}
+
+.modal-content .price {
+    width: 90%;
+    display: inline-block;
+    border-top: 1px solid black;
+    padding-top: 10px;
+}
+
+.modal-content p {
+    font-size: 20px;
+}
+
+.description-product button {
+    position: absolute;
+    background-color: rgb(142, 0, 0);
+    display: block;
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.description-product .go-to-cart {
+    top: 167px;
+    left: 30px;
+}
+
+.description-product .keep-shopping {
+    top: 213px;
+    left: 30px;
+}
+
+/* End modal add product to cart */

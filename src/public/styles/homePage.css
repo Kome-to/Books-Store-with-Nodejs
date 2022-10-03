@@ -12,7 +12,14 @@
 html {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #f2f2f2;
-    ;
+}
+
+body {
+    position: relative;
+}
+
+h1 {
+    margin: 0;
 }
 
 .header {
@@ -133,7 +140,7 @@ html {
 .best-seller {
     position: relative;
     top: 100px;
-    margin: 20px 0px;
+    padding: 20px 0px;
     width: 100%;
     height: 100%;
     display: block;
@@ -155,7 +162,9 @@ html {
 
 .books {
     margin: 20px 0px;
-    text-align: left;
+    display: inline-block;
+    width: 100%;
+    padding: 4px;
 }
 
 .book {
@@ -165,11 +174,15 @@ html {
     text-align: center;
     width: 22%;
     height: 100%;
-    /* float: left; */
     padding: 4px;
     margin: 13.5px;
     border-radius: 10px;
-    border: 1px solid black;
+    border: 1px solid #00B4CC;
+}
+
+.book:hover {
+    top: -10px;
+    box-shadow: 5px 5px #00B4CC;
 }
 
 
@@ -266,7 +279,6 @@ html {
 
 .action-hover {
     position: absolute;
-
     top: 100px;
     left: -4px;
 }
@@ -275,6 +287,13 @@ html {
     padding: 10px;
     font-size: 20px;
     display: block;
+    background-color: #00B4CC;
+    border-radius: 100%;
+    margin-top: 5px;
+}
+
+.action-hover i:hover {
+    background-color: #016d7b;
 }
 
 .detail-book {
@@ -350,7 +369,7 @@ html {
     display: block;
     width: 150px;
     height: 40px;
-    margin: 0px 46px;
+    margin: 0px 49px;
 }
 
 .add-to-cart button {
@@ -465,3 +484,94 @@ tr {
     text-decoration: none;
     margin-top: 30px;
 }
+
+.view-more:hover {
+    background-color: #00889a;
+}
+
+
+/* Modal add product to cart */
+.modal-add-product-to-cart {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    border-radius: 10px;
+    position: absolute;
+    width: 30%;
+    height: 40%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(255, 255, 255);
+    padding: 16px;
+    text-align: center;
+}
+
+.modal-content img {
+    display: inline-block;
+    height: 280px;
+    border-radius: 10px;
+}
+
+.modal-content img:hover {
+    height: 282px;
+    border-radius: 10px;
+}
+
+.description-product {
+    position: relative;
+    float: right;
+    width: 50%;
+    height: 50%;
+}
+
+.modal-content .title {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 10px 0px;
+}
+
+.modal-content .price {
+    width: 90%;
+    display: inline-block;
+    border-top: 1px solid black;
+    padding-top: 10px;
+}
+
+.modal-content p {
+    font-size: 20px;
+}
+
+.description-product button {
+    position: absolute;
+    background-color: rgb(142, 0, 0);
+    display: block;
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.description-product .go-to-cart {
+    top: 167px;
+    left: 30px;
+}
+
+.description-product .keep-shopping {
+    top: 213px;
+    left: 30px;
+}
+
+/* End modal add product to cart */

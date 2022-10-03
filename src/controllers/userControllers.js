@@ -12,7 +12,7 @@ const getBooksPage = async (req, res) => {
 }
 
 const getAboutPage = async (req, res) => {
-    return res.render('about.ejs');
+    return res.render('aboutPage.ejs');
 }
 
 const getLoginPage = async (req, res) => {
@@ -30,8 +30,19 @@ const getDetailPage = async (req, res) => {
 }
 
 const getCartPage = async (req, res) => {
-    const books = await Books.find({});
-    return res.render('cartPage.ejs', { books: books });
+    try {
+        let books = [], productAmount = [];
+        if (req.cookies.cart) {
+            const product = JSON.parse(req.cookies.cart);
+            const productID = product.map(item => item.id);
+            productAmount = product.map(item => item.amount);
+            books = await Books.find().where('_id').in(productID);
+        }
+        return res.render('cartPage.ejs', { books: books, amounts: productAmount });
+    } catch (err) {
+        console.log(err);
+    }
+
 }
 
 module.exports = {

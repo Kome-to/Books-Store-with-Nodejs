@@ -1,11 +1,12 @@
-const books = document.querySelectorAll('.book');
-const countCart = document.querySelector('.count-book-cart');
 import { getCartToken, addProductToCart } from './function.js';
 
-
+const countCart = document.querySelector('.count-book-cart');
 
 //Get quantities of cart
 countCart.textContent = getCartToken().length;
+
+
+const books = document.querySelectorAll('.book');
 
 books.forEach(book => {
     book.addEventListener('click', () => {
@@ -24,8 +25,4 @@ books.forEach(book => {
         const idBook = book.children[7].value;
         addProductToCart(idBook);
     })
-})
-
-document.querySelector('.keep-shopping').addEventListener('click', () => {
-    document.querySelector('.modal-add-product-to-cart').classList.add('hidden-action');
 })

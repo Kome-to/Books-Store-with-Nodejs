@@ -38,46 +38,56 @@
         <div class="container shopping-cart">
             <h1>Shopping Cart</h1>
             <br><hr>
-            <table>
-                <tr>
-                 <th></th>
-                  <th>Name product</th>
-                  <th>Quantities</th>
-                  <th>Price</th>
-                  <th></th>
-                </tr>
-                <% for (let i =0; i <4;  i++ ) { %>
-                <tr>
-                    <td class="td-1"><img src="<%= books[i].image%>" width="55px" alt=""></td>
-                  <td class="td-2">Alfreds Futterkiste</td>
-                  <td class="td-3"><input type="number" class="count-order" value="1" min="1"></td>
-                  <td class="td-4">100$</td>
-                  <td class="td-5"><a href="#">Remove</a></td>
-                </tr>
-                <% } %> 
-                <tr style="border: none;font-size:20px;font-weight:700">
-                    <td></td>
-                    <td></td>
-                    <td>Total: </td>
-                    <td>1000$</td>
-                    <td></td>
-                </tr >
-              </table>          
-              <div class="footer-cart">
-                <div class="row-1">
-                    <p>Note: </p><br>
-                    <textarea name="" id="" cols="50" rows="4"></textarea>
-                    <p><i class="fa fa-thin fa-left"></i></i><a href="">Buy More</a></p>
+            <%if(books.length) {%>
+                <table>
+                    <tr>
+                     <th></th>
+                      <th>Name product</th>
+                      <th>Quantities</th>
+                      <th>Price</th>
+                      <th></th>
+                    </tr>
+                    <% for (let i =0; i <books.length;  i++ ) { %>
+                    <tr>
+                        <td class="td-1"><img src="<%= books[i].image%>" width="55px" alt=""></td>
+                      <td class="td-2"><%= books[i].title%></td>
+                      <td class="td-3"><input type="number" class="count-order" value="<%=amounts[i]%>" min="1"></td>
+                      <td class="td-4">100$</td>
+                      <td class="td-5"><a class="remove-product <%=books[i]._id%>" href="/user/cart">Remove</a></td>
+                    </tr>
+                    <% } %> 
+                    <tr style="border: none;font-size:20px;font-weight:700">
+                        <td></td>
+                        <td></td>
+                        <td>Total: </td>
+                        <td>1000$</td>
+                        <td></td>
+                    </tr >
+                  </table>          
+                  <div class="footer-cart">
+                    <div class="row-1">
+                        <p>Note: </p><br>
+                        <textarea name="" id="" cols="50" rows="4"></textarea>
+                        <p><i class="fa-solid fa-basket-shopping"></i><a href="">Continue shopping</a></p>
+                    </div>
+                    <div class="row-2">
+                        
+                        <button>Continue to checkout</button>
+                    </div>
+                  </div>
+            <%} else {%> 
+                <div class="footer-cart">
+                    <div class="row-1">
+                        <p>Your cart is empty</p>
+                        <p><i class="fa-solid fa-basket-shopping"></i><a href="">Continue shopping</a></p>
+                    </div>
                 </div>
-                <div class="row-2">
-                    <button>Continue to checkout</button>
-                </div>
-              </div>
+            <%}%>
         </div>
         <div class="footer">
                 
         </div>
 </body>
 <script src="https://kit.fontawesome.com/9bcb66184c.js" crossorigin="anonymous"></script>
-<script src="/scripts/homePage.js"></script>
+<script type="module" src="/scripts/cartPage.js"></script>
 </html>

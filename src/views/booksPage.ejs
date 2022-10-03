@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/books.css">
+    <link rel="stylesheet" href="/styles/booksPage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Document</title>
 </head>
@@ -42,7 +42,6 @@
           </button>
         </div>
      </div>
-     <!-- <hr style="margin-top: 200px;width: 70%;margin-left: auto;margin-right: auto;"> -->
     <div class="container">
         
          <div class="row-1">
@@ -58,7 +57,7 @@
                     <li><a href="#">Short Stories</li>
                     <li>Suspense and Thrillers</li>
                     <li>Cookbooks</a></li>
-                    <li><a href="#">Self-Help</a></li>
+                    <li style="border: none;"><a href="#">Self-Help</a></li>
                 </ul>
             </div>
 
@@ -70,7 +69,7 @@
                     <li><a href="#">40 - 55 $</a></li>
                     <li><a href="#">55 - 70 $</a></li>
                     <li><a href="#">70 - 85 $</a></li>
-                    <li><a href="#">85 - 100 $</a></li>
+                    <li style="border: none;"><a href="#" >85 - 100 $</a></li>
                 </ul>
             </div>
          </div>
@@ -81,6 +80,7 @@
             <div class="books">
                 <% for (let i =0; i <10;  i++ ) { %>
                     <div class="book">
+                        <div class="test"></div>
                         <div class="img"><img src="<%= books[i].image%>" alt="" ></div>
                         <div class="title-book"><%=books[i].title%></div>
                         <div class="rating">
@@ -91,11 +91,33 @@
                             <span class="fa fa-star"></span>
                         </div>
                         <div class="price-book">100$</div>
+                        <div class="hidden-action action-hover ">
+                            <i class="fa-solid fa-cart-shopping action-add-to-cart"></i>
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+                        <form action="/books/detail/<%=books[i]._id%>" class="get-detail" method="GET"></form>
+                        <input type="text" hidden value="<%=books[i]._id%>">
                     </div>
                 <% } %>
             </div>
          </div>
     </div>
+
+    <div class="modal-add-product-to-cart hidden-action">
+        <div class="modal-content">
+            <img src="<%= books[1].image%>" alt="">
+            <div class="description-product">
+                <div class="title"><%= books[1].title%></div>
+                <p>Is now in your cart</p>
+                <br>
+                <div class="price">Price: 100$</div>
+                <a href="/user/cart"><button class="go-to-cart">Go To Cart</button></a>
+                <button class="keep-shopping">Keep Shopping</button>
+            </div>
+        </div>
+
+    </div>
 </body>
 <script src="https://kit.fontawesome.com/9bcb66184c.js" crossorigin="anonymous"></script>
+<script type="module" src="/scripts/booksPage.js"></script>
 </html>
