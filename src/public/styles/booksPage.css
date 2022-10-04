@@ -279,7 +279,7 @@ body {
 }
 
 .hidden-action {
-    /* display: none; */
+    display: none;
 }
 
 .action-hover {
@@ -392,6 +392,10 @@ body {
     font-size: 16px;
 }
 
+.description-product button:hover {
+    background-color: rgb(95, 0, 0);
+}
+
 .description-product .go-to-cart {
     top: 167px;
     left: 30px;
@@ -403,3 +407,9 @@ body {
 }
 
 /* End modal add product to cart */
+
+
+.container .genres a:hover,
+.container .prices a:hover {
+    color: red;
+}

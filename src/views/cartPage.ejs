@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/homePage.css">
+    <link rel="stylesheet" href="/styles/cartPage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Book Store</title>
 </head>
@@ -53,7 +54,8 @@
                       <td class="td-2"><%= books[i].title%></td>
                       <td class="td-3"><input type="number" class="count-order" value="<%=amounts[i]%>" min="1"></td>
                       <td class="td-4">100$</td>
-                      <td class="td-5"><a class="remove-product <%=books[i]._id%>" href="/user/cart">Remove</a></td>
+                      <td class="td-5"><a class="remove-product <%=books[i]._id%>" href="/user/cart">
+                        <i class="fa-solid fa-trash"></i></a></td>
                     </tr>
                     <% } %> 
                     <tr style="border: none;font-size:20px;font-weight:700">
@@ -68,7 +70,8 @@
                     <div class="row-1">
                         <p>Note: </p><br>
                         <textarea name="" id="" cols="50" rows="4"></textarea>
-                        <p><i class="fa-solid fa-basket-shopping"></i><a href="">Continue shopping</a></p>
+                        <p><a class="continue-shopping" href="">
+                            <i class="fa-solid fa-arrow-left"></i>Continue shopping</a></p>
                     </div>
                     <div class="row-2">
                         
@@ -78,8 +81,10 @@
             <%} else {%> 
                 <div class="footer-cart">
                     <div class="row-1">
-                        <p>Your cart is empty</p>
-                        <p><i class="fa-solid fa-basket-shopping"></i><a href="">Continue shopping</a></p>
+                        <p class="cart-empty">Your cart is empty</p>
+                        <hr width="222%">
+                        <p><a class="continue-shopping" href="">
+                            <i class="fa-solid fa-arrow-left"></i> Continue shopping</a></p>
                     </div>
                 </div>
             <%}%>

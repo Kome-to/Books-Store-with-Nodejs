@@ -1,0 +1,208 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+.checked {
+    color: rgb(215, 215, 58);
+}
+
+.logo-page a {
+    text-decoration: none;
+    display: inline-block;
+}
+
+html {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f2f2f2;
+    height: 100%;
+}
+
+.header {
+    position: fixed;
+    top: 0%;
+    width: 100%;
+    display: block;
+    height: 80px;
+    border-bottom: 2px solid black;
+    background-color: white;
+    z-index: 1000;
+}
+
+.logo-page {
+    position: absolute;
+    left: 8%;
+    padding: 15px;
+    width: 40%;
+    display: inline-block;
+}
+
+.name-page {
+    color: black;
+    position: absolute;
+    padding: 10px;
+    display: inline-block;
+    font-size: 25px;
+}
+
+.nav-bar {
+    position: absolute;
+    display: inline-block;
+    height: 100%;
+    width: 60%;
+    right: 0px;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.sub-nav {
+    font-size: 20px;
+    position: absolute;
+    display: inline-block;
+    right: 8%;
+    width: 20%;
+    top: 35%;
+    text-align: center;
+}
+
+.sub-nav a {
+    text-decoration: none;
+    color: black;
+}
+
+.sub-nav i {
+    display: block;
+    margin: auto;
+    height: 100%;
+}
+
+.count-book-cart {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    border-radius: 90px;
+    font-size: 14px;
+    padding: 4px;
+    background-color: rgb(242, 242, 242);
+}
+
+.login-text,
+.login,
+.cart {
+    position: relative;
+    height: 100%;
+    display: inline-block;
+    padding: 0px 10px;
+}
+
+.login-text {
+    padding-right: 0px !important;
+    font-size: 16px;
+}
+
+.nav-menu {
+    height: 100%;
+}
+
+.nav-menu li {
+    position: relative;
+    display: inline-block;
+    padding: 0px 20px;
+    list-style: none;
+    line-height: 78px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: black;
+}
+
+.active {
+    background-color: #00B4CC;
+    border-radius: 4px;
+}
+
+.container {
+    width: 70%;
+    margin: auto;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+body {
+    background: #f2f2f2;
+    font-family: 'Open Sans', sans-serif;
+    position: relative;
+}
+
+.login-pane {
+    display: block;
+    margin: 200px auto;
+    width: 33%;
+    height: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #00B4CC;
+    text-align: center;
+    /* border: 1px solid rgb(0, 0, 0); */
+}
+
+.username-field,
+.password-field {
+
+    padding: 10px;
+}
+
+.username-field label,
+.password-field label {
+    display: block;
+    text-align: left;
+    font-size: 25px;
+    left: -10px;
+}
+
+.username-field input,
+.password-field input {
+    width: 100%;
+    height: 30px;
+    font-size: 20px;
+}
+
+.footer-login {
+    padding-top: 18px;
+    width: 100%;
+    text-align: right;
+}
+
+.submit-login {
+    color: white;
+    background-color: #000100;
+    border-radius: 10px;
+    padding: 8px 14px;
+    border: none;
+    font-size: 16px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.submit-login:hover {
+    background-color: #797979;
+}
+
+.login-pane a {
+    padding-right: 10px;
+    padding-left: 35px;
+    display: inline-block;
+}
+
+.hidden-action {
+    display: none !important;
+}
+
+.error-input {
+    color: red;
+    font-size: 16px;
+    padding-left: 10px;
+    display: inline-block;
+}

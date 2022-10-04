@@ -1,0 +1,31 @@
+.remove-product i {
+    color: rgb(127, 2, 2);
+}
+
+.remove-product i:hover {
+    color: red;
+}
+
+.continue-shopping {
+    font-size: 20px;
+    padding: 10px;
+    color: rgb(114, 113, 113);
+}
+
+.continue-shopping:hover {
+    color: rgb(180, 3, 3);
+}
+
+.continue-shopping i {
+    padding: 0px 10px;
+}
+
+.cart-empty {
+    text-align: center;
+    display: block;
+    color: rgb(152, 147, 147);
+    font-size: 18px;
+    position: relative;
+    left: 60%;
+    padding: 20px 0px;
+}

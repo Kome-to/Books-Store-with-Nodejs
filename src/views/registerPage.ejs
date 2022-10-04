@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/homePage.css">
+    <link rel="stylesheet" href="/styles/registerPage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Document</title>
 </head>
@@ -37,28 +37,41 @@
 
     <div class="register-pane">
         <h1>Register</h1>
-        <div class="username-field">
-            <label for="">User name</label><br>
-            <input type="text" name="" id="" >
-        </div>
-        <div class="username-field">
-            <label for="">Full Name</label><br>
-            <input type="text" name="" id="" >
-        </div>
-        <div class="username-field">
-            <label for="">Address</label><br>
-            <input type="text" name="" id="" >
-        </div>
-        <div class="username-field">
-            <label for="">Email</label><br>
-            <input type="text" name="" id="" >
-        </div>
-        <div class="password-field">
-            <label for="">Password</label><br>
-            <input type="password">
-        </div>
-        <div class="footer-login">
-            <button type="submit" class="submit-login">Submit</button>
+        <form action="">
+            <div class="username-field">
+                <label for="">User name<span class="error-input hidden-action"></span></label>
+                <br>
+                <input required type="text"/>
+            </div>
+            <div class="username-field">
+                <label for="">Full Name<span class="error-input hidden-action"></span></label>
+                <br>
+                <input required type="text"/>
+            </div>
+            <div class="username-field">
+                <label for="">Address<span class="error-input hidden-action"></span></label>
+                <br>
+                <input required type="text"/>
+            </div>
+            <div class="username-field">
+                <label for="">Email<span class="error-input hidden-action"></span></label>
+                <br>
+                <input required type="text"/>
+            </div>
+            <div class="password-field">
+                <label for="">Password<span class="error-input hidden-action"></span></label>
+                <br>
+                <input required type="password"/>
+            </div>
+            <div class="footer-login">
+                <button type="button" class="submit-login">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="modal-register hidden-action">
+        <div class="modal-register-content">
+            <div class="register-success">Register successfully</div>
+            <button class="register-login"><a href="/login">Login</a></button>
         </div>
     </div>
 </body>

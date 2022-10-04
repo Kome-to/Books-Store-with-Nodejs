@@ -38,7 +38,7 @@
         <div class="search">
            <input type="text" class="searchTerm" placeholder="What are you looking for?">
            <button type="submit" class="searchButton">
-             <i class="fa fa-search"></i>
+            <i class="fa fa-search"></i>
           </button>
         </div>
      </div>
@@ -78,9 +78,8 @@
          <div class="row-3">
             <div class="title-row-3">Books</div>
             <div class="books">
-                <% for (let i =0; i <10;  i++ ) { %>
+                <% for (let i =0; i <books.length;  i++ ) { %>
                     <div class="book">
-                        <div class="test"></div>
                         <div class="img"><img src="<%= books[i].image%>" alt="" ></div>
                         <div class="title-book"><%=books[i].title%></div>
                         <div class="rating">
@@ -105,9 +104,9 @@
 
     <div class="modal-add-product-to-cart hidden-action">
         <div class="modal-content">
-            <img src="<%= books[1].image%>" alt="">
+            <img src="#" alt="">
             <div class="description-product">
-                <div class="title"><%= books[1].title%></div>
+                <div class="title"></div>
                 <p>Is now in your cart</p>
                 <br>
                 <div class="price">Price: 100$</div>
