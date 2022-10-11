@@ -9,31 +9,8 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="header">
-        <div class="logo-page">
-            <a href="/">
-                <img src="/images/logo.webp" alt="logo" width="50px" style="border-radius: 10px;">
-            <div class="name-page" style="font-weight: 500;">Book Store</div>
-            </a>
-        </div>
-        <div class="nav-bar">
-            <ul class="nav-menu">
-                <li ><a href="/" class="">Home</a></li>
-                <li class="active"><a href="/books" class="">Books</a></li>
-                <li><a href="/about" class="">About</a></li>
-            </ul>
-        </div>
-        <div class="sub-nav">
-                <div class="login-text"><a href="/login">Log in</a></div>
-                <div class="login">
-                    <a href="/login"><i class="fa-solid fa-user"></i></a>
-                </div>
-                <div class="cart">
-                    <a href="/user/cart"><i class="fa-solid fa-cart-shopping"></i></a>
-                    <span class="count-book-cart">0</span>
-                </div>
-        </div>
-    </div>
+    
+    <%- include('partials/header.ejs')%>
 
     <div class="register-pane">
         <h1>Register</h1>

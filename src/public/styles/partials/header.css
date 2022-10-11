@@ -1,0 +1,161 @@
+.header {
+    position: fixed;
+    top: 0%;
+    width: 100%;
+    display: block;
+    height: 80px;
+    border-bottom: 2px solid black;
+    background-color: white;
+    z-index: 1000;
+}
+
+.logo-page {
+    position: absolute;
+    left: 8%;
+    padding: 15px;
+    width: 40%;
+    display: inline-block;
+}
+
+.logo-page a {
+    text-decoration: none;
+    display: inline-block;
+}
+
+.name-page {
+    color: black;
+    position: absolute;
+    padding: 10px;
+    display: inline-block;
+    font-size: 25px;
+}
+
+.nav-bar {
+    position: absolute;
+    display: inline-block;
+    height: 100%;
+    width: 60%;
+    right: 0px;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.sub-nav {
+    font-size: 20px;
+    position: absolute;
+    display: inline-block;
+    right: 8%;
+    width: 20%;
+    top: 10%;
+    text-align: center;
+}
+
+.sub-nav i {
+    display: inline-block;
+    margin: auto;
+    height: 100%;
+}
+
+.sub-nav a {
+    text-decoration: none;
+    color: black;
+}
+
+.count-book-cart {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    border-radius: 90px;
+    font-size: 14px;
+    padding: 4px;
+    background-color: rgb(242, 242, 242);
+}
+
+.after-login,
+.login-text,
+.login,
+.cart {
+    position: relative;
+    height: 100%;
+    display: inline-block;
+    padding: 0px 10px;
+}
+
+.login-text {
+    padding-right: 0px !important;
+    font-size: 16px;
+}
+
+.nav-menu {
+    height: 100%;
+}
+
+.nav-menu li {
+    position: relative;
+    display: inline-block;
+    padding: 0px 20px;
+    list-style: none;
+    line-height: 78px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: black;
+}
+
+.user-option {
+    position: absolute;
+    top: 50px;
+    right: -4px;
+    background-color: #00B4CC;
+    width: 143px;
+    height: 105px;
+    padding: 10px 0px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    line-height: 24px;
+}
+
+.user-option li {
+    list-style: none;
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid black;
+}
+
+.user-option li:hover {
+    background-color: #e5e5e5;
+}
+
+.user-option .log-out {
+    border: none;
+}
+
+
+.sub-nav .fa-angle-down {
+    display: inline-block;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.user-option .fa-caret-up {
+    position: absolute;
+    font-size: 25px;
+    color: #00B4CC;
+    top: -12%;
+    right: 8%;
+}
+
+.hidden-action {
+    display: none !important;
+}
+
+.user-nav {
+    display: inline-block;
+    line-height: 60px;
+    cursor: pointer;
+}
+
+.login-required {
+    display: none !important;
+}

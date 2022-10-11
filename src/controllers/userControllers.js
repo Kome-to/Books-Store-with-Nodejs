@@ -3,7 +3,19 @@ const Books = require('../models/books');
 
 const getHomePage = async (req, res) => {
     const books = await Books.find({});
-    return res.render('homePage.ejs', { books: books });
+    let bestSeller = [], newRelease = [];
+    if (books.length > 4) {
+        newRelease = [books[books.length - 1], books[books.length - 2], books[books.length - 3], books[books.length - 4],];
+        books.sort((a, b) => {
+            if (a.amountSold > b.amountSold) return -1;
+            else return 1;
+        });
+        bestSeller = [books[0], books[1], books[2], books[3],];
+    } else {
+        bestSeller = [...books];
+        newRelease = [...books];
+    }
+    return res.render('homePage.ejs', { books, bestSeller, newRelease, user: req.user });
 }
 
 const getBooksPage = async (req, res) => {
@@ -43,25 +55,21 @@ const getCartPage = async (req, res) => {
             const product = JSON.parse(req.cookies.cart);
             const productID = product.map(item => item.id);
             productAmount = product.map(item => item.amount);
-            books = await Books.find().where('_id').in(productID);
+            for (let e of productID) {
+                const book = await Books.findById(e);
+                books.push(book);
+            }
         }
-        return res.render('cartPage.ejs', { books: books, amounts: productAmount });
+        const total = books.reduce((total, value, index) => {
+            return total + value.price * productAmount[index];
+        }, 0)
+        return res.render('cartPage.ejs', { 'books': books, amounts: productAmount, total });
     } catch (err) {
         return res.json(400).json(err);
     }
 
 }
 
-const booksDetail = async (req, res) => {
-    try {
-        const _id = req.body.id;
-        const book = await Books.findById(_id);
-        return res.status(200).json({ book });
-    } catch (err) {
-        return res.json(400).json(err);
-    }
-
-}
 
 module.exports = {
     getHomePage,
@@ -72,5 +80,5 @@ module.exports = {
     getDetailPage,
     getCartPage,
     searchBooks,
-    booksDetail
+    // booksDetail
 }

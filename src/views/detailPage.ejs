@@ -4,43 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/homePage.css">
+    <link rel="stylesheet" href="/styles/detailPage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Document</title>
 </head>
 <body>
-    <div class="header">
-        <div class="logo-page">
-            <a href="/">
-                <img src="/images/logo.webp" alt="logo" width="50px" style="border-radius: 10px;">
-            <div class="name-page" style="font-weight: 500;">Book Store</div>
-            </a>
-        </div>
-        <div class="nav-bar">
-            <ul class="nav-menu">
-                <li class="active"><a href="/" class="">Home</a></li>
-                <li><a href="/books" class="">Books</a></li>
-                <li><a href="/about" class="">About</a></li>
-            </ul>
-        </div>
-        <div class="sub-nav">
-            <div class="login-text"><a href="/login">Log in</a></div>
-            <div class="login">
-                <a href="/login"><i class="fa-solid fa-user"></i></a>
-            </div>
-            <div class="cart">
-                <a href="/user/cart"><i class="fa-solid fa-cart-shopping"></i></a>
-                <span class="count-book-cart">0</span>
-            </div>
-        </div>
-    </div>
+    
+    <%- include('partials/header.ejs')%>
+
     <div class="container detail-book">
         <div class="link-arrow">
-            <a href="#">Home</a>
-            >
-            <a href="#">Books</a>
-            >
-            <a href="#"><%= book.title%></a>
+            <a href="/">Home</a>
+            /
+            <a href="/books">Books</a>
+            /
+            <a href=""><%= book.title%></a>
         </div>
         <br><br><br>
         <div class="detail">
@@ -52,11 +30,15 @@
                 <br>
                 <div class="SKU-detail">SKU: <%= book._id%></div>
                 <br>
-                <div class="Prices-detail">100$</div>
+                <div class="Prices-detail">Price: <%=book.price%> $</div>
                 <br>
                 <div class="author-detail">Author: <%= book.author%></div>
                 <br>
-                <div class="genres-detail">Genres: <%= book.genres%></div>
+                <div class="genres-detail">Genres: 
+                    <% for (let i =0; i <book.genres.length;  i++ ) { %>
+                        <a href="#"><%= book.genres[i]%></a>,
+                    <%}%>
+                </div>
                 <br>
                 <div class="overview-detail">Overview: <br> <br>
                     <%= book.description%></div>
@@ -66,7 +48,7 @@
         <div class="count-and-add">
             <div class="count">
                 <div class="decrease-count">-</div>
-                <div class="number-count">0</div>
+                <div class="number-count">1</div>
                 <div class="increase-count">+</div>
             </div>
             <br>
@@ -74,6 +56,10 @@
             <br>
             <div class="add-to-cart">
                 <button>ADD TO CART</button>
+                <input type="text" hidden value="{
+                    &quot;_id&quot;     : &quot;<%=book._id%>&quot;,
+                    &quot;title&quot;   : &quot;<%=book.title%>&quot;,
+                    &quot;image&quot;   : &quot;<%=book.image%>&quot;}">
             </div>
         </div>
         <br><br><br>
@@ -100,16 +86,16 @@
                             <i class="fa-solid fa-eye"></i>
                         </div>
                         <form action="/books/detail/<%=book._id%>" class="get-detail" method="GET"></form>
-                        <input type="text" hidden value="<%=book._id%>">
+                        <input type="text" hidden value="<%=book%>">
                     </div>
                 <% } %>
             </div>
             <a href="/books" class="view-more">View more</a>
         </div>
     </div>
-    <div class="footer">
 
-    </div>
+
+    <%- include('partials/footer.ejs')%>
 </body>
 <script src="https://kit.fontawesome.com/9bcb66184c.js" crossorigin="anonymous"></script>
 <script type="module" src="/scripts/detailPage.js"></script>

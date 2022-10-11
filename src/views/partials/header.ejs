@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/partials/header.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <title>Document</title>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-page">
+            <a href="/">
+                <img src="/images/logo.webp" alt="logo" width="50px" style="border-radius: 10px;">
+            <div class="name-page">Book Store</div>
+            </a>
+        </div>
+        <div class="nav-bar">
+            <ul class="nav-menu">
+                <li class="li-home"><a href="/" class="">Home</a></li>
+                <li class="li-book"><a href="/books" class="">Books</a></li>
+                <li class="li-about"><a href="/about" class="">About</a></li>
+            </ul>
+        </div>
+        <div class="sub-nav">
+            <div class="user-nav">
+                <div class="login-text">
+                    <a class="hidden-action" href="/login"></a>
+                    
+                </div>
+                <div class="login">
+                    <a href="#"><i class="fa-solid fa-user"></i></a>
+                    <i class="fa-solid fa-angle-down hidden-action"></i>
+                    <div class="user-option login-required hidden-action">
+                        <i class="fa-solid fa-caret-up"></i>
+                        <ul>
+                            <li class="your-profile">Your profile</li>
+                            <li class="log-out">Logout</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="cart">
+                <a href="/user/cart"><i class="fa-solid fa-cart-shopping"></i></a>
+                <span class="count-book-cart">0</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="module" src="/scripts/partials/header.js"></script>
+</html>

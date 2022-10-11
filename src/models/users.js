@@ -38,7 +38,15 @@ const User = new Schema({
         default: false
     },
     refreshToken: {
-        type: String
+        type: String,
+        default: ''
+    },
+    cart: {
+        type: String,
+        default: '[]'
+    },
+    orderSuccess: {
+        type: Array
     }
 })
 

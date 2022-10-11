@@ -1,0 +1,105 @@
+/* Modal add product to cart */
+.modal-add-product-to-cart {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    border-radius: 10px;
+    position: absolute;
+    width: 30%;
+    height: 40%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(255, 255, 255);
+    padding: 16px;
+    text-align: center;
+}
+
+.modal-content img {
+    display: inline-block;
+    height: 280px;
+    border-radius: 10px;
+}
+
+.modal-content img:hover {
+    height: 282px;
+    border-radius: 10px;
+}
+
+.description-product {
+    position: relative;
+    float: right;
+    width: 50%;
+    height: 50%;
+}
+
+.modal-content .title {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 10px 0px;
+
+    /* padding: 0px 10px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 20ch; */
+}
+
+.modal-content .price {
+    width: 90%;
+    display: inline-block;
+    border-top: 1px solid black;
+    padding-top: 10px;
+}
+
+.modal-content p {
+    font-size: 20px;
+}
+
+.description-product button {
+    position: absolute;
+    background-color: rgb(142, 0, 0);
+    display: block;
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.description-product button:hover {
+    background-color: rgb(95, 0, 0);
+}
+
+.description-product .go-to-cart {
+    top: 167px;
+    left: 30px;
+}
+
+.description-product .keep-shopping {
+    top: 213px;
+    left: 30px;
+}
+
+/* End modal add product to cart */
+
+/* .footer {
+    height: 200px;
+    width: 100%;
+    background-color: black;
+    z-index: 1000;
+    bottom: 0px;
+    display: block;
+} */

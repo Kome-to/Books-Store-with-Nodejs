@@ -12,12 +12,12 @@ const loginUser = async (user) => {
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ user })
         })
-
+        console.log(res.status)
         if (res.status === 200) {
             const data = await res.json();
-            const accessToken = data.accessToken;
-            localStorage.setItem('accessToken', accessToken);
-            alert('Login Successfully');
+            localStorage.setItem('token', data.accessToken);
+            document.cookie = `cart=${data.cart};max-age=2592000;path=/`;
+            document.querySelector('.load-home-page').submit();
         } else {
             throw 'error';
         }
@@ -52,9 +52,8 @@ const validateFormLogin = (arr) => {
     return flag;
 }
 
-const bt = document.querySelector('.submit-login');
 
-bt.addEventListener('click', () => {
+document.querySelector('.submit-login').addEventListener('click', async () => {
     const arr = [...document.querySelectorAll('.login-pane input')].map(data => data.value);
     if (validateFormLogin(arr)) {
         const user = {
@@ -63,4 +62,11 @@ bt.addEventListener('click', () => {
         }
         loginUser(user);
     }
+});
+document.querySelectorAll('.login-pane input').forEach(ele => {
+    ele.addEventListener('keypress', (e) => {
+        if (e.key === "Enter") {
+            document.querySelector('.submit-login').click();
+        }
+    });
 })

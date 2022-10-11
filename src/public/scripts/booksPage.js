@@ -1,11 +1,13 @@
-import { getCartToken, addProductToCart } from './function.js';
+import { getCartToken, addProductToCart, loadUser } from './function.js';
+
+loadUser();
 
 const countCart = document.querySelector('.count-book-cart');
 
 //Get quantities of cart
 countCart.textContent = getCartToken().length;
 
-
+document.querySelector('.nav-bar .li-book').classList.add('active');
 
 
 document.querySelector('.keep-shopping').addEventListener('click', () => {
@@ -36,7 +38,7 @@ const searchBooks = async (input) => {
             html +=
                 `<div class="book">
                 <div class="img"><img src="${data[i].image}" alt="" ></div>
-        <div class="title-book">${data[i].title}></div>
+        <div class="title-book">${data[i].title}</div>
         <div class="rating">
             <span class="fa fa-star checked"></span>
             <span class="fa fa-star checked"></span>
@@ -82,7 +84,6 @@ const books = document.querySelectorAll('.book');
 const bookEvent = (books) => {
     books.forEach(book => {
         book.addEventListener('click', () => {
-            console.log('dfd');
             book.children[5].submit();
         });
 
@@ -93,10 +94,10 @@ const bookEvent = (books) => {
         book.addEventListener('mouseout', () => {
             book.children[4].classList.add('hidden-action')
         })
-        book.children[4].children[0].addEventListener('click', (e) => {
+        book.children[4].children[0].addEventListener('click', async (e) => {
             e.stopPropagation();
-            const idBook = book.children[6].value;
-            addProductToCart(idBook);
+            const infoBook = book.children[6].value;
+            await addProductToCart(infoBook, 1);
         })
     })
 }

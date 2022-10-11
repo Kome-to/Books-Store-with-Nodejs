@@ -1,5 +1,7 @@
 const countCart = document.querySelector('.count-book-cart');
-import { getCartToken } from './function.js';
+import { addProductToCart, getCartToken, loadUser } from './function.js';
+
+loadUser();
 
 //Get quantities of cart
 countCart.textContent = getCartToken().length;
@@ -15,6 +17,14 @@ increaseBt.addEventListener('click', () => {
 })
 
 decreaseBt.addEventListener('click', () => {
-    if (n_count > 0) n_count--;
+    if (n_count > 1) n_count--;
     n_countBt.textContent = n_count;
+})
+const addBt = document.querySelector('.add-to-cart button')
+
+addBt.addEventListener('click', async () => {
+    const infoBook = document.querySelector('.add-to-cart input').value;
+
+    const amount = n_countBt.textContent = n_count;
+    await addProductToCart(infoBook, amount);
 })

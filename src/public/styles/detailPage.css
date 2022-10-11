@@ -1,0 +1,185 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.checked {
+    color: rgb(215, 215, 58);
+}
+
+
+html {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f2f2f2;
+}
+
+body {
+    position: relative;
+}
+
+
+.active {
+    background-color: #00B4CC;
+    border-radius: 4px;
+}
+
+.container {
+    width: 70%;
+    margin: auto;
+}
+
+.detail-book {
+    margin-top: 100px;
+    position: relative;
+}
+
+.img-detail {
+    display: inline-block;
+    width: 33%;
+}
+
+.description-detail {
+    position: absolute;
+    margin-left: 40px;
+    /* top: 128px; */
+    display: inline-block;
+    width: 65%;
+    height: 50%;
+    letter-spacing: 1px;
+}
+
+.title-detail {
+    font-size: 35px;
+}
+
+.count-and-add {
+    display: block;
+}
+
+.count {
+    display: block;
+    width: 10%;
+    position: relative;
+    margin: 23px 103px;
+}
+
+.decrease-count,
+.number-count,
+.increase-count {
+    position: absolute;
+    display: inline-block;
+    width: 40%;
+    height: 40px;
+    padding: 10px 10px;
+    background-color: #0a181a;
+    text-align: center;
+    color: white;
+}
+
+.decrease-count {
+    left: -6.5px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.number-count {
+    left: 36px;
+}
+
+.increase-count {
+    left: 78.5px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.increase-count:hover,
+.decrease-count:hover {
+    background-color: #4b4b4b;
+}
+
+.add-to-cart {
+    display: block;
+    width: 150px;
+    height: 40px;
+    margin: 0px 85px;
+}
+
+.add-to-cart button {
+    background-color: #00B4CC;
+    width: 150px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.add-to-cart button:hover {
+    background-color: #006e7c;
+}
+
+.link-arrow a {
+    text-decoration: none;
+    color: #000000;
+    padding: 5px;
+}
+
+.link-arrow a:hover {
+    color: rgb(255, 100, 100);
+}
+
+.books {
+    margin: 20px 0px;
+    display: inline-block;
+    width: 100%;
+    padding: 4px;
+}
+
+.book {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    width: 22%;
+    height: 100%;
+    padding: 4px;
+    margin: 13.5px;
+    border-radius: 10px;
+    border: 1px solid #00B4CC;
+}
+
+.book:hover {
+    top: -10px;
+    box-shadow: 5px 5px #00B4CC;
+}
+
+
+.img img {
+    width: 180px;
+    height: 250px;
+    padding: 10px;
+}
+
+.hidden-action {
+    display: none;
+}
+
+.view-more {
+    width: 10%;
+    color: white;
+    text-align: center;
+    display: block;
+    margin: 10px auto;
+    text-decoration: none;
+    padding: 10px;
+    background-color: #00B4CC;
+    border-radius: 10px;
+}
+
+.view-more:hover {
+    background-color: #00889a;
+}

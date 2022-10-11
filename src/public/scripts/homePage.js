@@ -1,8 +1,10 @@
 const books = document.querySelectorAll('.book');
 const countCart = document.querySelector('.count-book-cart');
-import { getCartToken, addProductToCart } from './function.js';
+import { getCartToken, addProductToCart, loadUser } from './function.js';
 
+loadUser();
 
+document.querySelector('.nav-bar .li-home').classList.add('active');
 
 //Get quantities of cart
 countCart.textContent = getCartToken().length;
@@ -19,13 +21,9 @@ books.forEach(book => {
     book.addEventListener('mouseout', () => {
         book.children[5].classList.add('hidden-action')
     })
-    book.children[5].children[0].addEventListener('click', (e) => {
+    book.children[5].children[0].addEventListener('click', async (e) => {
         e.stopPropagation();
-        const idBook = book.children[7].value;
-        addProductToCart(idBook);
+        const infoBook = book.children[7].value;
+        await addProductToCart(infoBook, 1);
     })
-})
-
-document.querySelector('.keep-shopping').addEventListener('click', () => {
-    document.querySelector('.modal-add-product-to-cart').classList.add('hidden-action');
 })

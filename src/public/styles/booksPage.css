@@ -4,119 +4,15 @@
     box-sizing: border-box;
 }
 
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
 .checked {
     color: rgb(215, 215, 58);
 }
 
-.logo-page a {
-    text-decoration: none;
-    display: inline-block;
-}
 
 html {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #f2f2f2;
     ;
-}
-
-.header {
-    position: fixed;
-    top: 0%;
-    width: 100%;
-    display: block;
-    height: 80px;
-    border-bottom: 2px solid black;
-    background-color: white;
-    z-index: 1000;
-}
-
-.logo-page {
-    position: absolute;
-    left: 8%;
-    padding: 15px;
-    width: 40%;
-    display: inline-block;
-}
-
-.name-page {
-    color: black;
-    position: absolute;
-    padding: 10px;
-    display: inline-block;
-    font-size: 25px;
-}
-
-.nav-bar {
-    position: absolute;
-    display: inline-block;
-    height: 100%;
-    width: 60%;
-    right: 0px;
-    font-size: 20px;
-    font-weight: 900;
-}
-
-.sub-nav {
-    font-size: 20px;
-    position: absolute;
-    display: inline-block;
-    right: 8%;
-    width: 20%;
-    top: 35%;
-    text-align: center;
-}
-
-.sub-nav i {
-    display: block;
-    margin: auto;
-    height: 100%;
-}
-
-.count-book-cart {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    border-radius: 90px;
-    font-size: 14px;
-    padding: 4px;
-    background-color: rgb(242, 242, 242);
-}
-
-.login-text,
-.login,
-.cart {
-    position: relative;
-    height: 100%;
-    display: inline-block;
-    padding: 0px 10px;
-}
-
-.login-text {
-    padding-right: 0px !important;
-    font-size: 16px;
-}
-
-.nav-menu {
-    height: 100%;
-}
-
-.nav-menu li {
-    position: relative;
-    display: inline-block;
-    padding: 0px 20px;
-    list-style: none;
-    line-height: 78px;
-}
-
-.nav-menu a {
-    text-decoration: none;
-    color: black;
 }
 
 .active {
@@ -200,9 +96,14 @@ body {
     /* padding-top: 30px; */
 }
 
-/* .books {
-    width: 100%;
-} */
+.book .title-book {
+    padding: 0px 10px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 20ch;
+}
 
 .book {
     text-align: center;
@@ -316,97 +217,6 @@ body {
 .hidden-action {
     display: none;
 }
-
-
-/* Modal add product to cart */
-.modal-add-product-to-cart {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-}
-
-.modal-content {
-    border-radius: 10px;
-    position: absolute;
-    width: 30%;
-    height: 40%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgb(255, 255, 255);
-    padding: 16px;
-    text-align: center;
-}
-
-.modal-content img {
-    display: inline-block;
-    height: 280px;
-    border-radius: 10px;
-}
-
-.modal-content img:hover {
-    height: 282px;
-    border-radius: 10px;
-}
-
-.description-product {
-    position: relative;
-    float: right;
-    width: 50%;
-    height: 50%;
-}
-
-.modal-content .title {
-    text-align: center;
-    margin-top: 30px;
-    font-size: 20px;
-    font-weight: 700;
-    padding: 10px 0px;
-}
-
-.modal-content .price {
-    width: 90%;
-    display: inline-block;
-    border-top: 1px solid black;
-    padding-top: 10px;
-}
-
-.modal-content p {
-    font-size: 20px;
-}
-
-.description-product button {
-    position: absolute;
-    background-color: rgb(142, 0, 0);
-    display: block;
-    border: none;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 10px;
-    width: 150px;
-    height: 40px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.description-product button:hover {
-    background-color: rgb(95, 0, 0);
-}
-
-.description-product .go-to-cart {
-    top: 167px;
-    left: 30px;
-}
-
-.description-product .keep-shopping {
-    top: 213px;
-    left: 30px;
-}
-
-/* End modal add product to cart */
 
 
 .container .genres a:hover,

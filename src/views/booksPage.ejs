@@ -9,31 +9,9 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="header">
-        <div class="logo-page">
-            <a href="/">
-                <img src="/images/logo.webp" alt="logo" width="50px" style="border-radius: 10px;">
-            <div class="name-page" style="font-weight: 500;">Book Store</div>
-            </a>
-        </div>
-        <div class="nav-bar">
-            <ul class="nav-menu">
-                <li ><a href="/" class="">Home</a></li>
-                <li class="active"><a href="/books" class="">Books</a></li>
-                <li><a href="/about" class="">About</a></li>
-            </ul>
-        </div>
-        <div class="sub-nav">
-                <div class="login-text"><a href="/login">Log in</a></div>
-                <div class="login">
-                    <a href="/login"><i class="fa-solid fa-user"></i></a>
-                </div>
-                <div class="cart">
-                    <a href="/user/cart"><i class="fa-solid fa-cart-shopping"></i></a>
-                    <span class="count-book-cart">0</span>
-                </div>
-        </div>
-    </div>
+    
+    <%- include('partials/header.ejs')%>
+
     <div class="wrap">
         <div class="search">
            <input type="text" class="searchTerm" placeholder="What are you looking for?">
@@ -48,16 +26,16 @@
             <div class="sub-1">
                 <div class="title-row-1">Genres</div>
                 <ul class="genres">
-                    <li><a href="#">Light Novel</a></li>
-                    <li><a href="#">Manga</a></li>
-                    <li><a href="#">Novel</a></li>
-                    <li><a href="#">Historical Fiction</a></li>
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Comedy</a></li>
+                    <li><a href="#">Fantasy</a></li>
+                    <li><a href="#">School Life</a></li>
                     <li><a href="#">Romance</a></li>
-                    <li><a href="#">Science Fiction</a></li>
-                    <li><a href="#">Short Stories</li>
-                    <li>Suspense and Thrillers</li>
-                    <li>Cookbooks</a></li>
-                    <li style="border: none;"><a href="#">Self-Help</a></li>
+                    <li><a href="#">Isekai</a></li>
+                    <li><a href="#">Seinen</li>
+                    <li><a href="#">Mystery</a></li>
+                    <li><a href="#">Shounen</a></a></li>
+                    <li style="border: none;"><a href="#">Military</a></li>
                 </ul>
             </div>
 
@@ -89,33 +67,24 @@
                             <span class="fa fa-star"></span>
                             <span class="fa fa-star"></span>
                         </div>
-                        <div class="price-book">100$</div>
+                        <div class="price-book"><%=books[i].price%> $</div>
                         <div class="hidden-action action-hover ">
                             <i class="fa-solid fa-cart-shopping action-add-to-cart"></i>
                             <i class="fa-solid fa-eye"></i>
                         </div>
                         <form action="/books/detail/<%=books[i]._id%>" class="get-detail" method="GET"></form>
-                        <input type="text" hidden value="<%=books[i]._id%>">
+                        <input type="text" hidden value="{
+                            &quot;_id&quot;     : &quot;<%=books[i]._id%>&quot;,
+                            &quot;title&quot;   : &quot;<%=books[i].title%>&quot;,
+                            &quot;image&quot;   : &quot;<%=books[i].image%>&quot;,
+                            &quot;price&quot;   : &quot;<%=books[i].price%>&quot;}">
                     </div>
                 <% } %>
             </div>
          </div>
     </div>
 
-    <div class="modal-add-product-to-cart hidden-action">
-        <div class="modal-content">
-            <img src="#" alt="">
-            <div class="description-product">
-                <div class="title"></div>
-                <p>Is now in your cart</p>
-                <br>
-                <div class="price">Price: 100$</div>
-                <a href="/user/cart"><button class="go-to-cart">Go To Cart</button></a>
-                <button class="keep-shopping">Keep Shopping</button>
-            </div>
-        </div>
-
-    </div>
+    <%- include('partials/footer.ejs')%>
 </body>
 <script src="https://kit.fontawesome.com/9bcb66184c.js" crossorigin="anonymous"></script>
 <script type="module" src="/scripts/booksPage.js"></script>

@@ -6,44 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/homePage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <title>Book Store</title>
 </head>
 <body>
-        <div class="header">
-            <div class="logo-page">
-                <a href="/">
-                    <img src="/images/logo.webp" alt="logo" width="50px" style="border-radius: 10px;">
-                <div class="name-page">Book Store</div>
-                </a>
-            </div>
-            <div class="nav-bar">
-                <ul class="nav-menu">
-                    <li class="active"><a href="/" class="">Home</a></li>
-                    <li><a href="/books" class="">Books</a></li>
-                    <li><a href="/about" class="">About</a></li>
-                </ul>
-            </div>
-            <div class="sub-nav">
-                <div class="login-text"><a href="/login">Log in</a></div>
-                <div class="login">
-                    <a href="/login"><i class="fa-solid fa-user"></i></a>
-                </div>
-                <div class="cart">
-                    <a href="/user/cart"><i class="fa-solid fa-cart-shopping"></i></a>
-                    <span class="count-book-cart">0</span>
-                </div>
-        </div>
-        </div>
-
+        <%- include('partials/header.ejs')%>
+        
         <div class="container">
             <div class="new-release">
                 <h1>New release</h1>
                 <div class="books">
-                    <% for (let i =0; i <4;  i++ ) { %>
+                    <% for (let i =0; i <newRelease.length;  i++ ) { %>
                         <div class="book">
                             <div class="test"></div>
-                            <div class="img"><img src="<%= books[i].image%>" alt="" ></div>
-                            <div class="title-book"><%=books[i].title%></div>
+                            <div class="img"><img src="<%= newRelease[i].image%>" alt="" ></div>
+                            <span class="title-book"><%=newRelease[i].title%></span>
                             <div class="rating">
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
@@ -51,13 +28,17 @@
                                 <span class="fa fa-star"></span>
                                 <span class="fa fa-star"></span>
                             </div>
-                            <div class="price-book">100$</div>
+                            <div class="price-book"><%=newRelease[i].price%>$</div>
                             <div class="hidden-action action-hover ">
                                 <i class="fa-solid fa-cart-shopping action-add-to-cart"></i>
                                 <i class="fa-solid fa-eye"></i>
                             </div>
-                            <form action="/books/detail/<%=books[i]._id%>" class="get-detail" method="GET"></form>
-                            <input type="text" hidden value="<%=books[i]._id%>">
+                            <form action="/books/detail/<%=newRelease[i]._id%>" class="get-detail" method="GET"></form>
+                            <input type="text" hidden value="{
+                                &quot;_id&quot;     : &quot;<%=newRelease[i]._id%>&quot;,
+                                &quot;title&quot;   : &quot;<%=newRelease[i].title%>&quot;,
+                                &quot;image&quot;   : &quot;<%=newRelease[i].image%>&quot;,
+                                &quot;price&quot;   : &quot;<%=books[i].price%>&quot;}">
                         </div>                        
                     <% } %>
                 </div>
@@ -68,11 +49,11 @@
             <div class="best-seller">
                 <h1>Best seller</h1>
                 <div class="books">
-                    <% for (let i =0; i <4;  i++ ) { %>
+                    <% for (let i =0; i <bestSeller.length;  i++ ) { %>
                         <div class="book">
                             <div class="test"></div>
-                            <div class="img"><img src="<%= books[i].image%>" alt="" ></div>
-                            <div class="title-book"><%=books[i].title%></div>
+                            <div class="img"><img src="<%= bestSeller[i].image%>" alt="" ></div>
+                            <div class="title-book"><%=bestSeller[i].title%></div>
                             <div class="rating">
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
@@ -80,13 +61,17 @@
                                 <span class="fa fa-star"></span>
                                 <span class="fa fa-star"></span>
                             </div>
-                            <div class="price-book">100$</div>
+                            <div class="price-book"><%=bestSeller[i].price%> $</div>
                             <div class="hidden-action action-hover ">
                                 <i class="fa-solid fa-cart-shopping action-add-to-cart"></i>
                                 <i class="fa-solid fa-eye"></i>
                             </div>
-                            <form action="/books/detail/<%=books[i]._id%>" class="get-detail" method="GET"></form>
-                            <input type="text" hidden value="<%=books[i]._id%>">
+                            <form action="/books/detail/<%=bestSeller[i]._id%>" class="get-detail" method="GET"></form>
+                            <input type="text" hidden value="{
+                                &quot;_id&quot;     : &quot;<%=bestSeller[i]._id%>&quot;,
+                                &quot;title&quot;   : &quot;<%=bestSeller[i].title%>&quot;,
+                                &quot;image&quot;   : &quot;<%=bestSeller[i].image%>&quot;,
+                                &quot;price&quot;   : &quot;<%=books[i].price%>&quot;}">
                         </div>
                     <% } %>
                 </div>
@@ -95,24 +80,9 @@
                 <hr>
             </div>
         </div>
-        <div class="footer">
-                
-        </div>
 
-        <div class="modal-add-product-to-cart hidden-action">
-            <div class="modal-content">
-                <img src="<%= books[1].image%>" alt="">
-                <div class="description-product">
-                    <div class="title"><%= books[1].title%></div>
-                    <p>Is now in your cart</p>
-                    <br>
-                    <div class="price">Price: 100$</div>
-                    <a href="/user/cart"><button class="go-to-cart">Go To Cart</button></a>
-                    <button class="keep-shopping">Keep Shopping</button>
-                </div>
-            </div>
-
-        </div>
+        
+        <%- include('partials/footer.ejs')%>
 </body>
 
 <script src="https://kit.fontawesome.com/9bcb66184c.js" crossorigin="anonymous"></script>
