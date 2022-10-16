@@ -20,7 +20,7 @@ const addBt = document.querySelector('.add-to-cart button')
 addBt.addEventListener('click', async () => {
     const infoBook = document.querySelector('.add-to-cart input').value;
 
-    const amount = n_countBt.textContent = n_count;
+    const amount = Number.parseInt(n_countBt.textContent);
     await addProductToCart(infoBook, amount);
 })
 

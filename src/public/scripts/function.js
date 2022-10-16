@@ -23,30 +23,36 @@ const updateCart = async (cart) => {
 }
 
 const changeCart = async (infoBook, amount) => {
-    infoBook = JSON.parse(infoBook);
-    const id = infoBook._id;
-    let cartArr = getCartToken();
-    let flag = false;
-    for (let i = 0; i < cartArr.length; i++) {
-        if (cartArr[i].id === id) {
-            flag = true;
-            if (cartArr[i].amount + amount <= 0) {
-                console.log(cartArr[i].amount, amount);
-                console.log(cartArr);
-                cartArr.splice(i, 1);
-                console.log(cartArr);
-            } else {
-                cartArr[i].amount += amount;
+    try {
+        amount = Number.parseInt(amount);
+        infoBook = JSON.parse(infoBook);
+        const id = infoBook._id;
+        let cartArr = getCartToken();
+        let flag = false;
+        for (let i = 0; i < cartArr.length; i++) {
+            if (cartArr[i].id === id) {
+                flag = true;
+                if (cartArr[i].amount + amount <= 0) {
+                    console.log(cartArr[i].amount, amount);
+                    console.log(cartArr);
+                    cartArr.splice(i, 1);
+                    console.log(cartArr);
+                } else {
+                    cartArr[i].amount += amount;
+                }
             }
         }
+        if ((cartArr.length === 0 || flag === false) && amount > 0) {
+            cartArr.push({ id, amount, price: infoBook.price });
+        }
+        const str = JSON.stringify(cartArr);
+        document.cookie = `cart=${str};max-age=2592000;path=/`;
+        await updateCart(str);
+        return cartArr
+    } catch (err) {
+        console.log(err);
+        return null;
     }
-    if ((cartArr.length === 0 || flag === false) && amount > 0) {
-        cartArr.push({ id, amount, price: infoBook.price });
-    }
-    const str = JSON.stringify(cartArr);
-    document.cookie = `cart=${str};max-age=2592000;path=/`;
-    await updateCart(str);
-    return cartArr
 }
 
 const addProductToCart = async (infoBook, amount) => {
@@ -56,6 +62,7 @@ const addProductToCart = async (infoBook, amount) => {
     document.querySelector('.modal-add-product-to-cart .title').textContent = infoBook.title;
     document.querySelector('.modal-add-product-to-cart img').src = infoBook.image;
     document.querySelector('.modal-add-product-to-cart .price').innerText = `Price: ${infoBook.price} $`;
+    document.querySelector('.modal-add-product-to-cart .amount').innerText = `Amount: ${amount}`;
     document.querySelector('.modal-add-product-to-cart').classList.remove('hidden-action');
 }
 
@@ -91,7 +98,10 @@ const checkLogin = async () => {
         headers: { token: localStorage.getItem('token') }
     })
     const data = await res.json();
-    if (data.user) return data.user;
+    if (data.user) {
+        // document.cookie = `cart=${data.cart};max-age=2592000;path=/`;
+        return data.user;
+    }
     else if (res.status == 401 && await renewToken()) {
         return await checkLogin();
     } else
@@ -110,21 +120,26 @@ const renewToken = async () => {
 }
 
 const loadUser = async () => {
-    const user = await checkLogin();
-    const welcome = document.querySelector('.sub-nav .login-text a');
-    const welcomeIcon = document.querySelector('.sub-nav .login a');
-    if (user) {
-        const username = user.username.substring(0, 1).toUpperCase() + user.username.substring(1)
-        welcome.innerText = `Hello ${username}`;
-        welcome.href = '#';
-        welcomeIcon.href = '#';
-        document.querySelector('.user-option').classList.remove('login-required');
-        document.querySelector('.login .fa-angle-down').classList.remove('hidden-action');
-    } else {
-        welcomeIcon.href = '/login';
-        welcome.innerText = `Login`;
+    try {
+        const user = await checkLogin();
+        document.cookie = `cart=${user.cart};max-age=2592000;path=/`;
+        const welcome = document.querySelector('.sub-nav .login-text a');
+        const welcomeIcon = document.querySelector('.sub-nav .login a');
+        if (user) {
+            const username = user.username.substring(0, 1).toUpperCase() + user.username.substring(1)
+            welcome.innerText = `Hello ${username}`;
+            welcome.href = '#';
+            welcomeIcon.href = '#';
+            document.querySelector('.user-option').classList.remove('login-required');
+            document.querySelector('.login .fa-angle-down').classList.remove('hidden-action');
+        } else {
+            welcomeIcon.href = '/login';
+            welcome.innerText = `Login`;
+        }
+        welcome.classList.remove('hidden-action');
+    } catch (err) {
+        console.log(err);
     }
-    welcome.classList.remove('hidden-action');
 }
 
 const logout = async () => {
