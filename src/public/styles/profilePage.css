@@ -1,0 +1,230 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.checked {
+    color: rgb(215, 215, 58);
+}
+
+
+html {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f2f2f2;
+}
+
+body {
+    position: relative;
+}
+
+.container {
+    width: 70%;
+    margin: auto;
+    padding: 150px 0px;
+}
+
+
+.info-user {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 30px 20px;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.order-success {
+    margin-top: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    padding: 30px 20px;
+}
+
+
+.main-info h1 {
+    border-bottom: 1px solid rgba(191, 189, 189, 0.3);
+    display: inline-block;
+    position: relative;
+    width: 100%;
+}
+
+.avatar-user {
+    text-align: center;
+    position: relative;
+}
+
+.avatar-user img {
+    width: 60%;
+    border-radius: 16px;
+}
+
+.info-content {
+    padding: 16px 16px;
+    letter-spacing: 2px;
+    font-size: 20px;
+}
+
+.link-arrow {
+    padding-bottom: 40px;
+    font-size: 18px;
+}
+
+.link-arrow a {
+    text-decoration: none;
+    color: #000000;
+    padding: 5px;
+}
+
+.link-arrow a:hover {
+    color: rgb(255, 100, 100);
+}
+
+.main-info .text-edit {
+    padding: 10px;
+    position: absolute;
+    top: 0px;
+    display: inline-block;
+    font-size: 16px;
+    color: rgb(104, 112, 116);
+    right: 0px;
+    cursor: pointer;
+}
+
+.main-info .text-edit:hover {
+    color: rgb(182, 7, 7);
+}
+
+.main-info .username,
+.main-info .full-name,
+.main-info .address,
+.main-info .email {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+
+
+.main-info .username .label,
+.main-info .full-name .label,
+.main-info .address .label,
+.main-info .email .label {
+    display: inline-block;
+    color: black;
+    font-weight: 900;
+    text-align: right;
+    padding-right: 20%;
+}
+
+.main-info .username .info,
+.main-info .full-name .info,
+.main-info .address .info,
+.main-info .email .info {
+    font-weight: 400;
+}
+
+.hidden-action {
+    display: none;
+}
+
+.input-field {
+    font-size: 20px;
+    padding: 1px 12px;
+}
+
+.main-info .submit-modify {
+    background-color: #01c6b2;
+    padding: 8px 16px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    font-size: 16px;
+    float: right;
+    cursor: pointer;
+    margin-right: 60px;
+}
+
+.main-info .submit-modify:hover,
+.show-order:hover {
+    background-color: #710000;
+    color: #d9d9d9;
+}
+
+.avatar-user .upload-avatar {
+    background-color: #ffffff;
+    border: 1px solid black;
+    padding: 6px 10px;
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.avatar-user .upload-avatar:hover {
+    background-color: #c0c0c0;
+}
+
+.order-success h1 {
+    display: block;
+    border-bottom: 1px solid rgba(191, 189, 189, 0.3);
+    width: 100%;
+}
+
+.order-success .order-content {
+    display: block;
+    padding: 36px;
+    border-top: 1px solid black;
+}
+
+.order-success .product {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 15% 35% 25% 25%;
+}
+
+.order-success .product .img img {
+    width: 40%;
+}
+
+.order-success .product .title {
+    padding-top: 16px;
+}
+
+.order-success .product .amount {
+    padding-top: 16px;
+}
+
+.order-success .product .price {
+    padding-top: 16px;
+}
+
+.show-order {
+    background-color: #01c6b2;
+    padding: 8px 16px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    font-size: 16px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    top: 47px
+}
+
+.order-content .date-order,
+.order-content .total {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ff0031;
+}
+
+.order-success .empty {
+    text-align: center;
+    font-size: 20px;
+    padding-top: 30px;
+    color: #7d7d7d;
+}

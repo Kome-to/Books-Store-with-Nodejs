@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/profilePage.css">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('partials/header.ejs')%>
+
+    <div class="container">
+        <div class="link-arrow">
+            <a href="/">Home</a>
+            /
+            <a href="#">Profile</a>
+        </div>
+       <div class="info-user">
+            <div class="avatar-user">
+                <img src="/images/avatar.gif" alt="avatar">
+                <button class="upload-avatar hidden-action" type="submit">Upload avatar</button>
+                <input type="file" id="img" name="img" class="input-file hidden-action"/>
+
+            </div> 
+            <div class="main-info">
+                <h1>Profile 
+                    <div class="text-edit">Edit</div></h1>
+                <div class="info-content">
+                    <div class="username"><div class="label" for="">Username</div> <div class="info"></div></div>
+                    <div class="full-name"><div class="label" for="">Full Name</div> <div class="info"></div></div>
+                    <div class="address"><div class="label" for="">Address</div> <div class="info"></div></div>
+                    <div class="email"><div class="label" for="">Email</div> <div class="info"></div></div>
+                    <input type="text" hidden class="id-user">
+                </div>
+                <button class="submit-modify hidden-action" type="submit">Save</button>
+            </div>            
+       </div>
+       <button class="show-order">Show order success</button>
+        <div class="order-success hidden-action">
+            <h1>Order Success</h1>
+            
+            
+        </div>
+
+    </div>
+
+
+    <%- include('partials/footer.ejs')%>
+
+</body>
+<script type="module" src="/scripts/profilePage.js"></script>
+
+</html>

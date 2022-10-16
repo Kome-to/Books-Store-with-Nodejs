@@ -6,7 +6,7 @@ require('dotenv').config();
 
 const generalAccessToken = (data) => {
     const token = jwt.sign({
-        username: data.username,
+        // username: data.username,
         _id: data._id,
     }, process.env.SECRET_ACCESS_KEY, { expiresIn: '10s' });
     return token;
@@ -14,7 +14,7 @@ const generalAccessToken = (data) => {
 
 const generalRefreshToken = (data) => {
     const token = jwt.sign({
-        username: data.username,
+        // username: data.username,
         _id: data._id,
     }, process.env.SECRET_REFRESH_KEY, { expiresIn: '7d' });
     return token;

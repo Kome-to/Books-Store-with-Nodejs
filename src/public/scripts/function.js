@@ -92,11 +92,10 @@ const checkLogin = async () => {
     })
     const data = await res.json();
     if (data.user) return data.user;
-    else {
-        if (await renewToken()) {
-            return await checkLogin();
-        } else return null;
-    };
+    else if (res.status == 401 && await renewToken()) {
+        return await checkLogin();
+    } else
+        return null;
 }
 
 const renewToken = async () => {
@@ -148,6 +147,7 @@ const logout = async () => {
         console.log(err);
     }
 }
+
 
 export {
     getCartToken, addProductToCart, removeProductFromCart, loadUser, checkLogin, Validate, logout, renewToken,

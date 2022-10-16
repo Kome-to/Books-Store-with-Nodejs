@@ -34,6 +34,10 @@
     background-color: rgb(2, 187, 187);
 }
 
+.data-table .td-4 {
+    width: 12%;
+}
+
 
 /* Modal*/
 .modal-login-required,

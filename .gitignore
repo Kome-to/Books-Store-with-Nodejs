@@ -1,3 +1,5 @@
 node_modules
 .env
 bugList.txt
+sort.js
+taskList.txt

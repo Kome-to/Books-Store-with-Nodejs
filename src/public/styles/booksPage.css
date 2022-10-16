@@ -150,6 +150,7 @@ body {
 .prices li {
     line-height: 30px;
     border-bottom: 0.6px solid rgb(180, 175, 175);
+    cursor: pointer;
 }
 
 .sub-1 {
@@ -219,7 +220,7 @@ body {
 }
 
 
-.container .genres a:hover,
-.container .prices a:hover {
+.container .genres li:hover,
+.container .prices li:hover {
     color: red;
 }

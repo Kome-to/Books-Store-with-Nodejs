@@ -24,7 +24,7 @@ const Book = new Schema({
 
     genres: {
         type: Array,
-        default: []
+        default: [String]
     },
 
     description: {

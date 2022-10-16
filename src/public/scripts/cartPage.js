@@ -1,11 +1,8 @@
 import { getCartToken, removeProductFromCart, loadUser, renewToken, changeCart } from './function.js';
 
-loadUser();
 
-const countCart = document.querySelector('.count-book-cart');
 
-//Get quantities of cart
-countCart.textContent = getCartToken().length;
+
 
 const removeProducts = document.querySelectorAll('.remove-product');
 
@@ -46,6 +43,18 @@ if (document.querySelector('.footer-cart .row-2 button')) {
     });
 }
 
+const getTotal = () => {
+    let total = 0;
+    const products = document.querySelectorAll('table .data-table');
+    products.forEach(item => {
+        const amount = item.querySelector('.td-3 input').value;
+        const infoBook = JSON.parse(item.querySelector('.info-book').value);
+        const price = infoBook.price;
+        total += Number.parseInt(amount) * Number.parseInt(price);
+    });
+    return total;
+}
+
 document.querySelectorAll('table .td-3 input').forEach(item => {
     let beginValue = Number.parseInt(item.value);
     item.addEventListener('input', async () => {
@@ -57,6 +66,8 @@ document.querySelectorAll('table .td-3 input').forEach(item => {
             changeCart(infoBook, -1);
         }
         beginValue = afterValue;
+        document.querySelector('table .total-price').innerText = getTotal() + ' $';
     })
 })
+document.querySelector('table .total-price').innerText = getTotal() + ' $';
 

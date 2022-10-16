@@ -10,12 +10,16 @@ const verifyAccessToken = async (req, res, next) => {
         } else {
             try {
                 const user = await Users.findById(decoded._id);
-                if (user && user.username === decoded.username) {
+                // if (user && user.username === decoded.username)
+                if (user) {
                     req.user = {
                         _id: user._id,
                         username: user.username,
                         fullName: user.fullName,
-                        cart: user.cart
+                        cart: user.cart,
+                        email: user.email,
+                        address: user.address,
+                        orderSuccess: user.orderSuccess,
                     }
                     next();
                 } else {

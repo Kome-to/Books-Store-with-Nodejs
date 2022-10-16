@@ -68,11 +68,11 @@
         <div class="relate-book">
             <h1>Relations</h1>
             <div class="books">
-                <% for (let i =0; i <4;  i++ ) { %>
+                <% for (let i =0; i <relationBook.length;  i++ ) { %>
                     <div class="book">
                         <div class="test"></div>
-                        <div class="img"><img src="<%= book.image%>" alt="" ></div>
-                        <div class="title-book"><%=book.title%></div>
+                        <div class="img"><img src="<%= relationBook[i].image%>" alt="" ></div>
+                        <div class="title-book"><%=relationBook[i].title%></div>
                         <div class="rating">
                             <span class="fa fa-star checked"></span>
                             <span class="fa fa-star checked"></span>
@@ -80,17 +80,23 @@
                             <span class="fa fa-star"></span>
                             <span class="fa fa-star"></span>
                         </div>
-                        <div class="price-book">100$</div>
+                        <div class="price-book"><%=relationBook[i].price%> $</div>
                         <div class="hidden-action action-hover ">
                             <i class="fa-solid fa-cart-shopping action-add-to-cart"></i>
                             <i class="fa-solid fa-eye"></i>
                         </div>
-                        <form action="/books/detail/<%=book._id%>" class="get-detail" method="GET"></form>
-                        <input type="text" hidden value="<%=book%>">
+                        <form action="/books/detail/<%=relationBook[i]._id%>" class="get-detail" method="GET"></form>
+                        <input type="text" hidden value="{
+                            &quot;_id&quot;     : &quot;<%=relationBook[i]._id%>&quot;,
+                            &quot;title&quot;   : &quot;<%=relationBook[i].title%>&quot;,
+                            &quot;image&quot;   : &quot;<%=relationBook[i].image%>&quot;,
+                            &quot;price&quot;   : &quot;<%=relationBook[i].price%>&quot;}">
                     </div>
                 <% } %>
             </div>
             <a href="/books" class="view-more">View more</a>
+            <br>
+            <hr>
         </div>
     </div>
 
