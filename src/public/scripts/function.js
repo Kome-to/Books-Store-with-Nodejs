@@ -61,8 +61,8 @@ const addProductToCart = async (infoBook, amount) => {
     document.querySelector('.count-book-cart').textContent = cartArr.length;
     document.querySelector('.modal-add-product-to-cart .title').textContent = infoBook.title;
     document.querySelector('.modal-add-product-to-cart img').src = infoBook.image;
-    document.querySelector('.modal-add-product-to-cart .price').innerText = `Price: ${infoBook.price} $`;
-    document.querySelector('.modal-add-product-to-cart .amount').innerText = `Amount: ${amount}`;
+    document.querySelector('.modal-add-product-to-cart .price').innerText = `Price: ${infoBook.price} $   Amount: ${amount}`;
+    // document.querySelector('.modal-add-product-to-cart .amount').innerText = ``;
     document.querySelector('.modal-add-product-to-cart').classList.remove('hidden-action');
 }
 
