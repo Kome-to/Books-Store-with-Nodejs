@@ -25,7 +25,8 @@ const checkoutCart = async () => {
             headers: { token: localStorage.getItem('token') },
         })
         if (res.status === 200) {
-            document.querySelector('.modal-info-checkout').classList.remove('hidden-action');
+            document.querySelector('.modal-info-checkout').classList.remove('hidden-action');//Total : <%=total%> $
+            document.querySelector('.modal-info-checkout .info span').innerText = `Total : ${getTotal()} $`
             document.cookie = `cart="[]";max-age=2592000;path=/`;
         } else if (res.status === 401 && await renewToken()) {
             checkoutCart();
