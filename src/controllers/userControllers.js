@@ -58,7 +58,6 @@ const getDetailPage = async (req, res) => {
                 $in: [...genres]
             }
         });
-        console.log(relationBook);
         return res.render('detailPage.ejs', { book, relationBook });
     } catch (err) {
         console.log(err);
