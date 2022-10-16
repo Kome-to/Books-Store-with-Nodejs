@@ -122,10 +122,12 @@ const renewToken = async () => {
 const loadUser = async () => {
     try {
         const user = await checkLogin();
-        document.cookie = `cart=${user.cart};max-age=2592000;path=/`;
         const welcome = document.querySelector('.sub-nav .login-text a');
         const welcomeIcon = document.querySelector('.sub-nav .login a');
         if (user) {
+            if (user.cart) {
+                document.cookie = `cart=${user.cart};max-age=2592000;path=/`;
+            }
             const username = user.username.substring(0, 1).toUpperCase() + user.username.substring(1)
             welcome.innerText = `Hello ${username}`;
             welcome.href = '#';
