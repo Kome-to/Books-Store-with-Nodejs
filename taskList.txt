@@ -1,3 +1,0 @@
-# Relation in detailPage
-# split page book,search by genres and price  in booksPage
-# View profile user in nav bar
