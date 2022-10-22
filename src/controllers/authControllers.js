@@ -8,7 +8,7 @@ const generalAccessToken = (data) => {
     const token = jwt.sign({
         // username: data.username,
         _id: data._id,
-    }, process.env.SECRET_ACCESS_KEY, { expiresIn: '10s' });
+    }, process.env.SECRET_ACCESS_KEY, { expiresIn: '5s' });
     return token;
 }
 
@@ -69,9 +69,9 @@ const loginUser = async (req, res) => {
                         sameSite: 'strict'
                     });
                     const newCart = mergeCart(req.cookies.cart, user.cart);
-                    await Users.findOneAndUpdate({ username: user.username },
+                    const data = await Users.findOneAndUpdate({ username: user.username },
                         { refreshToken: refreshToken, cart: newCart });
-                    return res.status(200).json({ accessToken: accessToken, cart: newCart });
+                    return res.status(200).json({ accessToken: accessToken, cart: newCart, admin: data.admin });
                 } else {
                     return res.status(404).json('Wrong password');
                 }
@@ -93,16 +93,6 @@ const loadUser = (req, res) => {
         return res.status(200).json({ user });
     } catch (err) {
         return res.status(500).json(err)
-    }
-}
-
-const updateCart = async (req, res) => {
-    try {
-        await Users.findByIdAndUpdate(req.user._id, { cart: req.body.cart });
-        return res.status(200).json({ cart: req.body.cart });
-    } catch (err) {
-        console.log(err);
-        return res.status(500).json(err);
     }
 }
 
@@ -140,39 +130,17 @@ const createNewToken = async (req, res) => {
                     return res.status(403).json('You are not authentication');
                 }
             } catch (err) {
+                console.log(err);
                 return res.status(500).json(err);
             }
         }
     });
 }
 
-const checkout = async (req, res) => {
-    try {
-        const date = new Date();
-        let cart = req.user.cart;
-        const user = await Users.findById(req.user._id);
-        user.orderSuccess.push({ 'order': cart, 'date': JSON.stringify(date) });
-        user.cart = "[]";
-        await user.save();
-        cart = JSON.parse(cart);
-        cart.forEach(async item => {
-            const book = await Books.findById(item.id);
-            book.amountSold += item.amount;
-            await book.save();
-        })
-        console.log(cart);
-        return res.status(200).json('ok');
-    } catch (err) {
-        console.log(err);
-        return res.status(500).json(err);
-    }
-}
 module.exports = {
     registerUser,
     loginUser,
     loadUser,
-    updateCart,
     logoutUser,
     createNewToken,
-    checkout
 }

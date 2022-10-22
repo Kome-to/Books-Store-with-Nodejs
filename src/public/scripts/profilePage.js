@@ -1,4 +1,4 @@
-import { checkLogin, renewToken } from "./function.js";
+import { checkLogin, checkTokenEpx } from "./function.js";
 
 const usernameField = document.querySelector('.main-info .username .info');
 const fullNameField = document.querySelector('.main-info .full-name .info');
@@ -15,8 +15,6 @@ const loadProfile = async () => {
     emailField.innerText = user.email;
     idUser.value = user._id;
 }
-
-loadProfile();
 
 const editBt = document.querySelector('.main-info h1 .text-edit');
 
@@ -42,39 +40,43 @@ document.querySelector('.main-info .submit-modify').addEventListener('click', as
 })
 
 const updateUser = async () => {
-    const inputs = document.querySelectorAll('.info-content .input-field');
-    const user = {
-        _id: idUser.value,
-        username: inputs[0].value,
-        fullName: inputs[1].value,
-        address: inputs[2].value,
-        email: inputs[3].value,
+    try {
+        if (await checkTokenEpx(localStorage.getItem('token'))) {
+            const inputs = document.querySelectorAll('.info-content .input-field');
+            const user = {
+                _id: idUser.value,
+                username: inputs[0].value,
+                fullName: inputs[1].value,
+                address: inputs[2].value,
+                email: inputs[3].value,
+            }
+            const res = await fetch('/user/update', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json', token: localStorage.getItem('token') },
+                body: JSON.stringify({ user })
+            });
+            if (res.status == 200) {
+                window.location.href = '/user/profile';
+            }
+        }
+    } catch (err) {
+        console.log(err);
     }
-    const res = await fetch('/user/update', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json', token: localStorage.getItem('token') },
-        body: JSON.stringify({ user })
-    });
-    if (res.status == 200) {
-        window.location.href = '/user/profile';
-    } else if (res.status == 401 && await renewToken()) {
-        await updateUser();
-    };
 }
 
 const getOrderInfo = async (order) => {
     try {
-        const res = await fetch('/user/order-success', {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json', token: localStorage.getItem('token') },
-            body: JSON.stringify({ order })
-        })
-        if (res.status == 200) {
-            const data = await res.json();
-            return data.orderSuccess;
-        } else if (res.status == 401 && await renewToken()) {
-            await getOrderInfo();
-        } else return null
+        if (await checkTokenEpx(localStorage.getItem('token'))) {
+            const res = await fetch('/user/order-success', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json', token: localStorage.getItem('token') },
+                body: JSON.stringify({ order })
+            })
+            if (res.status == 200) {
+                const data = await res.json();
+                return data.orderSuccess;
+            } else return null
+        }
     } catch (err) {
         console.log(err);
     }
@@ -103,7 +105,7 @@ const loadOrder = async () => {
             minutes = '0' + minutes;
         }
         dateOrder.innerText =
-            `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}  ${date.getHours()}:${minutes}`;
+            `Time:  ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}  ${date.getHours()}:${minutes}\t\tAddress: ${user.address}`;
         orderContent.appendChild(dateOrder);
         const totalPrice = document.createElement('div');
         totalPrice.className = 'total';
@@ -142,5 +144,6 @@ document.querySelector('.show-order').addEventListener('click', async () => {
     document.querySelector('.order-success').classList.remove('hidden-action');
     document.querySelector('.show-order').classList.add('hidden-action');
     await loadOrder();
-
 })
+
+loadProfile();

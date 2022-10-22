@@ -1,4 +1,4 @@
-import { getCartToken, Validate } from './function.js';
+import { Validate } from './function.js';
 
 
 const loginUser = async (user) => {
@@ -8,11 +8,13 @@ const loginUser = async (user) => {
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ user })
         })
-        console.log(res.status)
         if (res.status === 200) {
             const data = await res.json();
             localStorage.setItem('token', data.accessToken);
             document.cookie = `cart=${data.cart};max-age=2592000;path=/`;
+            if (data.admin) {
+                document.querySelector('.load-home-page').action = '/admin';
+            }
             document.querySelector('.load-home-page').submit();
         } else {
             throw 'error';
@@ -56,7 +58,7 @@ document.querySelector('.submit-login').addEventListener('click', async () => {
             'username': arr[0],
             'password': arr[1],
         }
-        loginUser(user);
+        await loginUser(user);
     }
 });
 document.querySelectorAll('.login-pane input').forEach(ele => {

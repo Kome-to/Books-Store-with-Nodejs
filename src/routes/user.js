@@ -23,8 +23,8 @@ const userRouter = (app) => {
     router.get('/user/refresh', authControllers.createNewToken)
 
     //User
-    router.put('/user/updateCart', verifyAccessToken, authControllers.updateCart);
-    router.put('/user/checkout', verifyAccessToken, authControllers.checkout);
+    router.put('/user/updateCart', verifyAccessToken, userControllers.updateCart);
+    router.put('/user/checkout', verifyAccessToken, userControllers.checkout);
     router.get('/user/profile', userControllers.viewProfile);
     router.put('/user/update', verifyAccessToken, userControllers.updateUser);
     router.put('/user/order-success', verifyAccessToken, userControllers.getOrderInfo);

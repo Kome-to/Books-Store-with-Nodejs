@@ -1,8 +1,4 @@
-import { getCartToken, removeProductFromCart, loadUser, renewToken, changeCart } from './function.js';
-
-
-
-
+import { checkTokenEpx, removeProductFromCart, loadUser, changeCart } from './function.js';
 
 const removeProducts = document.querySelectorAll('.remove-product');
 
@@ -20,18 +16,18 @@ document.querySelector('.modal-login-required-content .cancel-modal').addEventLi
 
 const checkoutCart = async () => {
     try {
-        const res = await fetch('/user/checkout', {
-            method: 'PUT',
-            headers: { token: localStorage.getItem('token') },
-        })
-        if (res.status === 200) {
-            document.querySelector('.modal-info-checkout').classList.remove('hidden-action');//Total : <%=total%> $
-            document.querySelector('.modal-info-checkout .info span').innerText = `Total : ${getTotal()} $`
-            document.cookie = `cart="[]";max-age=2592000;path=/`;
-        } else if (res.status === 401 && await renewToken()) {
-            checkoutCart();
-        } else {
-            document.querySelector('.modal-login-required').classList.remove('hidden-action');
+        if (await checkTokenEpx(localStorage.getItem('token'))) {
+            const res = await fetch('/user/checkout', {
+                method: 'PUT',
+                headers: { token: localStorage.getItem('token') },
+            })
+            if (res.status === 200) {
+                document.querySelector('.modal-info-checkout').classList.remove('hidden-action');//Total : <%=total%> $
+                document.querySelector('.modal-info-checkout .info span').innerText = `Total : ${getTotal()} $`
+                document.cookie = `cart="[]";max-age=2592000;path=/`;
+            } else {
+                document.querySelector('.modal-login-required').classList.remove('hidden-action');
+            }
         }
     } catch (err) {
         console.log(err);

@@ -54,6 +54,9 @@ const getDetailPage = async (req, res) => {
         const book = await Books.findById(_id);
         const genres = book.genres;
         const relationBook = await Books.find({
+            _id: {
+                $nin: [_id]
+            },
             genres: {
                 $in: [...genres]
             }
@@ -155,6 +158,38 @@ const searchByGenres = async (req, res) => {
     }
 }
 
+const checkout = async (req, res) => {
+    try {
+        const date = new Date();
+        let cart = req.user.cart;
+        const user = await Users.findById(req.user._id);
+        user.orderSuccess.push({ 'order': cart, 'date': JSON.stringify(date) });
+        user.cart = "[]";
+        await user.save();
+        cart = JSON.parse(cart);
+        cart.forEach(async item => {
+            const book = await Books.findById(item.id);
+            book.amountSold += item.amount;
+            await book.save();
+        })
+        console.log(cart);
+        return res.status(200).json('ok');
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json(err);
+    }
+}
+
+const updateCart = async (req, res) => {
+    try {
+        await Users.findByIdAndUpdate(req.user._id, { cart: req.body.cart });
+        return res.status(200).json({ cart: req.body.cart });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json(err);
+    }
+}
+
 module.exports = {
     getHomePage,
     getBooksPage,
@@ -168,5 +203,7 @@ module.exports = {
     updateUser,
     getOrderInfo,
     searchByPrice,
-    searchByGenres
+    searchByGenres,
+    checkout,
+    updateCart
 }

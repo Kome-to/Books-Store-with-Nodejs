@@ -1,4 +1,4 @@
-import { getCartToken, addProductToCart, loadUser } from './function.js';
+import { addProductToCart, loadUser } from './function.js';
 
 
 
@@ -122,16 +122,16 @@ document.querySelectorAll('.genres li').forEach(item => {
 });
 
 
-document.querySelector('.searchTerm').addEventListener('keyup', (e) => {
+document.querySelector('.searchTerm').addEventListener('keyup', async (e) => {
     const input = document.querySelector('.searchTerm').value;
     if (e.key === 'Enter' || e.keyCode === 13) {
-        searchBooks(input);
+        await searchBooks(input);
     }
-})
+});
 
-document.querySelector('.searchButton').addEventListener('click', () => {
+document.querySelector('.searchButton').addEventListener('click', async () => {
     const input = document.querySelector('.searchTerm').value.toLowerCase();
-    searchBooks(input);
+    await searchBooks(input);
 })
 
 

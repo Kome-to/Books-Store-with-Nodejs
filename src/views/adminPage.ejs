@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/adminPage.css" class="css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Admin</title>
+</head>
+<body>
+
+    <!-- <iframe src="/images/comet.mp3" loop="loop" allow="autoplay" class="audio-main" id="iframeAudio"> -->
+        <!-- <audio src="/images/comet.mp3"></audio> -->
+    </iframe>  
+
+
+
+    <div class="header">
+        <div class="logo-page">
+            <a href="/admin">
+                <img src="/images/logo.webp" alt="logo" width="50px" style="border-radius: 10px;">
+            <div class="name-page">Book Store</div>
+            </a>
+        </div>
+        <!-- <div class="nav-bar">
+            <ul class="nav-menu">
+                <li class="li-home">Dashboard</li>
+            </ul>
+        </div> -->
+        <div class="sub-nav">
+            <div class="user-nav">
+                <div class="login-text">
+                    <a class="hidden-action" href="#"></a>
+                    
+                </div>
+                <div class="login">
+                    <a href="#"><i class="fa-solid fa-user"></i></a>
+                    <i class="fa-solid fa-angle-down hidden-action"></i>
+                    <div class="user-option login-required hidden-action">
+                        <i class="fa-solid fa-caret-up"></i>
+                        <ul>
+                            <li class="your-profile">View profile</li>
+                            <li class="log-out">Logout</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="">
+            <div class="title-dashboard">Dashboard</div>
+            <div class="dashboard">
+                <div class="books">
+                    <div class="title">Books
+                        <div class="number-of">Number of Books : <span class="number"></span></div>
+                    </div>
+                    <div class="content">
+                        <div class="action">
+                            <div class="view">View</div>
+                            <div class="add">Add</div>
+                            <!-- <div class="edit">Edit</div>
+                            <div class="delete">Delete</div> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="users">
+                    <div class="title">Users
+                        <div class="number-of">Number of Users : <span class="number"></span></div>
+                    </div>
+                    <div class="content">
+                        <div class="action">
+                            <div class="view">View</div>
+                            <div class="add">Add</div>
+                            <!-- <div class="edit">Edit</div>
+                            <div class="delete">Delete</div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container-profile hidden-action">
+        <div class="info-user ">
+            <div class="avatar-user">
+                <img src="/images/avatar.gif" alt="avatar">
+                <button class="upload-avatar hidden-action" type="submit">Upload avatar</button>
+                <input type="file" id="img" name="img" class="input-file hidden-action"/>
+
+            </div> 
+            <div class="main-info">
+                <h1>Profile 
+                    <div class="text-edit">Edit <i class="fa-solid fa-pen-to-square"></i></div></h1>
+                <div class="info-content">
+                    <div class="username"><div class="label" for="">Username</div> <div class="info"></div></div>
+                    <div class="full-name"><div class="label" for="">Full Name</div> <div class="info"></div></div>
+                    <div class="address"><div class="label" for="">Address</div> <div class="info"></div></div>
+                    <div class="email"><div class="label" for="">Email</div> <div class="info"></div></div>
+                    <input type="text" hidden class="id-user">
+                </div>
+                <button class="submit-modify hidden-action" type="submit">Save</button>
+            </div>            
+       </div>
+    </div>
+
+    <div class="container-view hidden-action">
+            <div class="books-list hidden-action">
+                <div class="title">Books</div>
+                <div class="wrap">
+                    <div class="search">
+                       <input type="text" class="searchTerm" placeholder="What are you looking for?">
+                       <button type="submit" class="searchButton">
+                        <i class="fa fa-search"></i>
+                      </button>
+                    </div>
+                 </div>
+                <div class="all-docs">
+                    <div class="book">
+                        <div class="img"><img src="https://upload.wikimedia.org/wikipedia/vi/thumb/f/fb/Chitose-kun_wa_Ramune_Bin_no_Naka_b%C3%ACa_vol_1.jpg/330px-Chitose-kun_wa_Ramune_Bin_no_Naka_b%C3%ACa_vol_1.jpg" alt=""></div>
+                        <div class="title-book">
+                            <div class="inner-title">Yahari ore seishun rabukome wa machigatteiru </div>
+                        </div>
+                        <div class="price-book">100$</div>
+                        <div class="delete"><i class="fa-solid fa-trash"></i></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="users-list hidden-action">
+                <div class="title">Users</div>
+                <div class="title-delete"><i class="fa-solid fa-trash"></i></div>
+                <div class="wrap">
+                    <div class="search">
+                       <input type="text" class="searchTerm" placeholder="What are you looking for?">
+                       <button type="submit" class="searchButton">
+                        <i class="fa fa-search"></i>
+                      </button>
+                    </div>
+                 </div>
+                <div class="all-docs">
+                    <div class="user">
+                        <div class="username">
+                            <div class="inner-username">chuducanh123</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-detail hidden-action">
+                <div class="book-detail hidden-action">
+                    <div class="img-book">
+                        <img src="" alt="book">
+                        <button class="upload-img-book hidden-action" type="submit">Upload image</button>
+                        <input type="file" id="img" name="img" class="input-file hidden-action"/>        
+                    </div> 
+                    <div class="main-info">
+                        <h1>Book detail 
+                            <div class="text-edit">Edit <i class="fa-solid fa-pen-to-square"></i></div></h1>
+                        <div class="info-content">
+                            <div class="title">
+                                <div class="label">Title</div> 
+                                <div class="info"></div>
+                                <span class="error-validate hidden-action">Test validate value</span>                            
+                            </div>
+                            <div class="author">
+                                <div class="label">Author</div> 
+                                <div class="info"></div>
+                                <span class="error-validate hidden-action">Test validate value</span>                            
+                            </div>
+                            <div class="genres">
+                                <div class="label">Genres</div> 
+                                <div class="info"></div>
+                                <span class="error-validate hidden-action">Test validate value</span>                            
+                            </div>
+                            <div class="price">
+                                <div class="label">Price</div> 
+                                <div class="info"></div>
+                                <span class="error-validate hidden-action">Test validate value</span>                            
+                            </div>
+                            <div class="amount-sold">
+                                <div class="label">Amount Sold</div> <div class="info">0</div></div>                            
+                            <input type="text" hidden class="id-book" value="new">
+                        </div>
+                    </div>
+                    <div class="description">
+                        <div class="label" for="">Description</div> 
+                        <div class="info"></div>
+                    </div>            
+                    <button class="submit-modify hidden-action" type="submit">Save</button>
+                    <button class="submit-add hidden-action" type="submit">Save</button>
+                </div>
+
+
+
+                <div class="user-detail hidden-action">
+                    <div class="img-user">
+                        <img src="/images/avatar.gif" alt="user">
+                        <button class="upload-img-user hidden-action" type="submit">Upload Avatar</button>
+                        <input type="file" id="img" name="img" class="input-file hidden-action"/>        
+                    </div> 
+                    <div class="main-info">
+                        <h1>User detail 
+                            <div class="text-edit">Edit <i class="fa-solid fa-pen-to-square"></i></div></h1>
+                        <div class="info-content">
+                            <div class="username"><div class="label" for="">Username</div> 
+                            <div class="info"></div>
+                            <span class="error-validate hidden-action">Test validate value</span>
+                            
+                        </div>
+                            <div class="full-name"><div class="label" for="">Full Name</div> 
+                            <div class="info"></div>
+                            <span class="error-validate hidden-action">Test validate value</span>
+
+                        </div>
+                            <div class="address"><div class="label" for="">Address</div> 
+                            <div class="info"></div>
+                            <span class="error-validate hidden-action">Test validate value</span>
+
+                        </div>
+                            <div class="email"><div class="label" for="">Email</div> 
+                            <div class="info"></div>
+                            <span class="error-validate hidden-action">Test validate value</span>
+
+                        </div>
+                            <input type="text" hidden class="id-user">
+                        </div>
+                        <button class="submit-modify hidden-action" type="submit">Save</button>
+                        <button class="submit-add hidden-action" type="submit">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+    </div>
+
+    <div class="modal-confirm-delete hidden-action">
+        <div class="inner-modal">
+            <div class="message">Are you sure to delete this item?</div>
+            <div class="confirm">
+                <button class="delete-confirm">Delete</button>
+                <button class="cancel-confirm">Cancel</button></div>
+        </div>
+    </div>
+
+</body>
+    <script src="https://kit.fontawesome.com/9bcb66184c.js" crossorigin="anonymous"></script>
+    <script type="module" src="/scripts/adminPage.js"></script>
+</html>

@@ -20,6 +20,7 @@ const verifyAccessToken = async (req, res, next) => {
                         email: user.email,
                         address: user.address,
                         orderSuccess: user.orderSuccess,
+                        admin: user.admin
                     }
                     next();
                 } else {
@@ -33,6 +34,17 @@ const verifyAccessToken = async (req, res, next) => {
 
 }
 
+const verifyAdmin = async (req, res, next) => {
+    verifyAccessToken(req, res, () => {
+        if (req.user.admin) {
+            next();
+        } else {
+            return res.status(403).json('No authorization');
+        }
+    })
+}
+
 module.exports = {
-    verifyAccessToken
+    verifyAccessToken,
+    verifyAdmin
 }

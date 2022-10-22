@@ -9,13 +9,12 @@ const getCartToken = () => {
 
 const updateCart = async (cart) => {
     try {
-        const res = await fetch('/user/updateCart', {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json', token: localStorage.getItem('token') },
-            body: JSON.stringify({ cart })
-        });
-        if (res.status === 401 && await renewToken()) {
-            updateCart(cart);
+        if (await checkTokenEpx(localStorage.getItem('token'))) {
+            const res = await fetch('/user/updateCart', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json', token: localStorage.getItem('token') },
+                body: JSON.stringify({ cart })
+            });
         }
     } catch (err) {
         console.log(err);
@@ -93,19 +92,24 @@ const Validate = {
 }
 
 const checkLogin = async () => {
-    const res = await fetch('/user/load', {
-        method: 'GET',
-        headers: { token: localStorage.getItem('token') }
-    })
-    const data = await res.json();
-    if (data.user) {
-        // document.cookie = `cart=${data.cart};max-age=2592000;path=/`;
-        return data.user;
+    try {
+        if (await checkTokenEpx(localStorage.getItem('token'))) {
+            const res = await fetch('/user/load', {
+                method: 'GET',
+                headers: { token: localStorage.getItem('token') }
+            })
+            if (res.status == 200) {
+                // document.cookie = `cart=${data.cart};max-age=2592000;path=/`;
+                const data = await res.json();
+                return data.user;
+            } else
+                return null;
+        } else {
+            return null
+        }
+    } catch (err) {
+        console.log(err);
     }
-    else if (res.status == 401 && await renewToken()) {
-        return await checkLogin();
-    } else
-        return null;
 }
 
 const renewToken = async () => {
@@ -128,10 +132,10 @@ const loadUser = async () => {
             if (user.cart) {
                 document.cookie = `cart=${user.cart};max-age=2592000;path=/`;
             }
-            const username = user.username.substring(0, 1).toUpperCase() + user.username.substring(1)
+            const username = user.username.substring(0, 1).toUpperCase() + user.username.substring(1);
             welcome.innerText = `Hello ${username}`;
-            welcome.href = '#';
-            welcomeIcon.href = '#';
+            welcome.href = '/user/profile';
+            welcomeIcon.href = '/user/profile';
             document.querySelector('.user-option').classList.remove('login-required');
             document.querySelector('.login .fa-angle-down').classList.remove('hidden-action');
         } else {
@@ -165,8 +169,29 @@ const logout = async () => {
     }
 }
 
+const parseJwt = (token) => {
+    let base64Url = token.split('.')[1];
+    let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    let jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+};
+
+const checkTokenEpx = async (token) => {
+    const dateExp = parseJwt(token).exp;
+    if (dateExp - Date.now() / 1000 > 0) {
+        return true;
+    } else {
+        if (await renewToken()) {
+            return true;
+        } else return false
+    }
+}
+
 
 export {
-    getCartToken, addProductToCart, removeProductFromCart, loadUser, checkLogin, Validate, logout, renewToken,
-    changeCart
+    Validate, getCartToken, addProductToCart, removeProductFromCart, loadUser, checkLogin, logout, renewToken,
+    changeCart, checkTokenEpx
 };
