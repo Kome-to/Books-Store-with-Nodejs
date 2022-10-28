@@ -418,22 +418,25 @@ const main = async () => {
             if (await checkTokenEpx(localStorage.getItem('token'))) {
                 const inputs = document.querySelectorAll('.book-detail .info-content .input-field');
                 const description = document.querySelector('.book-detail .description .description-field').value
-                const book = {
-                    _id: idBook.value,
-                    image: document.querySelector('.book-detail .img-book img').src,
-                    title: inputs[0].value,
-                    author: inputs[1].value,
-                    genres: [...inputs[2].value.split(',')],
-                    price: inputs[3].value,
-                    description: description
-                }
-                const res = await fetch('/admin/books/add', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', token: localStorage.getItem('token') },
-                    body: JSON.stringify({ book })
-                });
-                if (res.status == 200) {
-                    document.querySelector('.container-view').click();
+                if (validateBook(inputs[0].value, inputs[1].value, inputs[2].value, inputs[3].value)) {
+                    console.log('test');
+                    // const book = {
+                    //     _id: idBook.value,
+                    //     image: document.querySelector('.book-detail .img-book img').src,
+                    //     title: inputs[0].value,
+                    //     author: inputs[1].value,
+                    //     genres: [...inputs[2].value.split(',')],
+                    //     price: inputs[3].value,
+                    //     description: description
+                    // }
+                    // const res = await fetch('/admin/books/add', {
+                    //     method: 'POST',
+                    //     headers: { 'Content-Type': 'application/json', token: localStorage.getItem('token') },
+                    //     body: JSON.stringify({ book })
+                    // });
+                    // if (res.status == 200) {
+                    //     document.querySelector('.container-view').click();
+                    // }
                 }
             }
         } catch (err) {
@@ -734,6 +737,72 @@ const getAllUser = async () => {
     } catch (err) {
         console.log(err);
     }
+}
+
+// Validate
+const validateBook = (title, author, genres, price) => {
+    let flag = 1;
+    price = price.split('$')[0].trim();
+    // Tittle
+    if (!Validate.required(title)) {
+        flag = 0;
+        document.querySelector('.book-detail .main-info .title .error-validate').innerText = 'Tittle is required';
+        document.querySelector('.book-detail .main-info .title .error-validate').classList.remove('hidden-action');
+    } else {
+        if (!Validate.minLength(title.length, 5) || !Validate.maxLength(title.length, 100)) {
+            flag = 0;
+            document.querySelector('.book-detail .main-info .title .error-validate').innerText =
+                'Tittle must contain between 5 and 100 characters';
+            document.querySelector('.book-detail .main-info .title .error-validate').classList.remove('hidden-action');
+        } else {
+            document.querySelector('.book-detail .main-info .title .error-validate').classList.add('hidden-action');
+        }
+    }
+
+    // Author 
+    if (!Validate.required(author)) {
+        flag = 0;
+        document.querySelector('.book-detail .main-info .author .error-validate').innerText = 'Author is required';
+        document.querySelector('.book-detail .main-info .author .error-validate').classList.remove('hidden-action');
+    } else {
+        if (!Validate.minLength(author.length, 6) || !Validate.maxLength(author.length, 50)) {
+            flag = 0;
+            document.querySelector('.book-detail .main-info .author .error-validate').innerText =
+                'Author must contain between 6 and 50 characters';
+            document.querySelector('.book-detail .main-info .author .error-validate').classList.remove('hidden-action');
+        } else {
+            document.querySelector('.book-detail .main-info .author .error-validate').classList.add('hidden-action');
+        }
+    }
+
+    // Genres
+    if (!Validate.required(genres)) {
+        flag = 0;
+        document.querySelector('.book-detail .main-info .genres .error-validate').innerText =
+            'Genres is required and separated by commas';
+        document.querySelector('.book-detail .main-info .genres .error-validate').classList.remove('hidden-action');
+    } else {
+        document.querySelector('.book-detail .main-info .genres .error-validate').classList.add('hidden-action');
+    }
+
+    // Price
+    if (!Validate.required(price)) {
+        flag = 0;
+        document.querySelector('.book-detail .main-info .price .error-validate').innerText =
+            'Price is required';
+        document.querySelector('.book-detail .main-info .price .error-validate').classList.remove('hidden-action');
+    } else {
+        if (!Validate.isNumber(price)) {
+            flag = 0;
+            document.querySelector('.book-detail .main-info .price .error-validate').innerText =
+                'Price invalid';
+            document.querySelector('.book-detail .main-info .price .error-validate').classList.remove('hidden-action');
+        } else {
+            document.querySelector('.book-detail .main-info .price .error-validate').classList.add('hidden-action');
+        }
+    }
+
+    return flag;
 }
 
 main();

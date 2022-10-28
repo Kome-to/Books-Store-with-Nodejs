@@ -76,6 +76,14 @@ const Validate = {
         if (param === '') return false
         return true;
     },
+
+    isNumber: (number) => {
+        if (/^\d+(\.\d+)?$/.test(number)) {
+            return true;
+        }
+        return false;
+    },
+
     isEmail: (email) => {
         const regex = /^[a-z\-0-9]+@gmail.com$/
         if (regex.test(email)) return true;

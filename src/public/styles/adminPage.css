@@ -51,6 +51,7 @@ body {
     padding: 10px;
     display: inline-block;
     font-size: 25px;
+    z-index: 1;
 }
 
 .nav-bar {
@@ -756,7 +757,14 @@ body {
 
 .error-validate {
     grid-column: 2/span 1;
-    font-size: 16px;
+    font-size: 12px;
     color: red;
     padding-top: 5px;
+}
+
+/*prevent graphical glitch */
+.info-content {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
 }
