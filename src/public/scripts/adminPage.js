@@ -419,24 +419,23 @@ const main = async () => {
                 const inputs = document.querySelectorAll('.book-detail .info-content .input-field');
                 const description = document.querySelector('.book-detail .description .description-field').value
                 if (validateBook(inputs[0].value, inputs[1].value, inputs[2].value, inputs[3].value)) {
-                    console.log('test');
-                    // const book = {
-                    //     _id: idBook.value,
-                    //     image: document.querySelector('.book-detail .img-book img').src,
-                    //     title: inputs[0].value,
-                    //     author: inputs[1].value,
-                    //     genres: [...inputs[2].value.split(',')],
-                    //     price: inputs[3].value,
-                    //     description: description
-                    // }
-                    // const res = await fetch('/admin/books/add', {
-                    //     method: 'POST',
-                    //     headers: { 'Content-Type': 'application/json', token: localStorage.getItem('token') },
-                    //     body: JSON.stringify({ book })
-                    // });
-                    // if (res.status == 200) {
-                    //     document.querySelector('.container-view').click();
-                    // }
+                    const book = {
+                        _id: idBook.value,
+                        image: document.querySelector('.book-detail .img-book img').src,
+                        title: inputs[0].value,
+                        author: inputs[1].value,
+                        genres: [...inputs[2].value.split(',')],
+                        price: inputs[3].value,
+                        description: description
+                    }
+                    const res = await fetch('/admin/books/add', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', token: localStorage.getItem('token') },
+                        body: JSON.stringify({ book })
+                    });
+                    if (res.status == 200) {
+                        document.querySelector('.container-view').click();
+                    }
                 }
             }
         } catch (err) {

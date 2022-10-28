@@ -763,7 +763,8 @@ body {
 }
 
 /*prevent graphical glitch */
-.info-content {
+.info-content,
+.description {
     -webkit-transform-style: preserve-3d;
     -moz-transform-style: preserve-3d;
     transform-style: preserve-3d;
