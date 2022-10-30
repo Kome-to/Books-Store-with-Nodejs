@@ -1,4 +1,4 @@
-import { checkTokenEpx, removeProductFromCart, loadUser, changeCart } from './function.js';
+import { checkTokenEpx, removeProductFromCart, changeCart } from './function.js';
 
 const removeProducts = document.querySelectorAll('.remove-product');
 
@@ -28,6 +28,8 @@ const checkoutCart = async () => {
             } else {
                 document.querySelector('.modal-login-required').classList.remove('hidden-action');
             }
+        } else {
+            document.querySelector('.modal-login-required').classList.remove('hidden-action');
         }
     } catch (err) {
         console.log(err);
@@ -66,5 +68,8 @@ document.querySelectorAll('table .td-3 input').forEach(item => {
         document.querySelector('table .total-price').innerText = getTotal() + ' $';
     })
 })
-document.querySelector('table .total-price').innerText = getTotal() + ' $';
+
+if (document.querySelector('table .total-price')) {
+    document.querySelector('table .total-price').innerText = getTotal() + ' $';
+}
 

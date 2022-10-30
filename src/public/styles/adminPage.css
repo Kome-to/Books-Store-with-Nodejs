@@ -255,6 +255,8 @@ body {
 .modal-detail {
     height: 100%;
     width: 100%;
+    position: fixed;
+    background-color: rgba(0, 0, 0, .4);
 }
 
 .modal-detail .book-detail,
@@ -399,9 +401,13 @@ body {
     position: relative;
 }
 
-.avatar-user img,
-.user-detail .img-user img {
+.avatar-user img {
     width: 60%;
+    border-radius: 16px;
+}
+
+.user-detail .img-user img {
+    width: 85%;
     border-radius: 16px;
 }
 
@@ -410,6 +416,16 @@ body {
     padding: 16px 16px;
     letter-spacing: 2px;
     font-size: 20px;
+}
+
+.book-detail .img-book .image-place {
+    border: 1px solid;
+    width: 200px;
+    height: 274px;
+    margin: auto;
+    border-radius: 10px;
+    line-height: 269px;
+    font-size: 30px;
 }
 
 .main-info .text-edit {

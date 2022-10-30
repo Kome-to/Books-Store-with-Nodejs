@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 //Logger
 app.use(morgan('dev'));
@@ -26,8 +26,10 @@ viewEngine(app);
 
 //Router Admin
 adminRouter(app);
+
 //Router User
 userRouter(app);
+
 //404 page
 app.get('*', (req, res) => {
     return res.render('404page.ejs');

@@ -1,3 +1,32 @@
+
+const Validate = {
+    required: (param) => {
+        if (param === '') return false
+        return true;
+    },
+
+    isNumber: (number) => {
+        if (/^\d+(\.\d+)?$/.test(number)) {
+            return true;
+        }
+        return false;
+    },
+
+    isEmail: (email) => {
+        const regex = /^[a-z\-0-9]+@gmail.com$/
+        if (regex.test(email)) return true;
+        return false;
+    },
+    minLength: (length, min) => {
+        if (length < min) return false;
+        return true;
+    },
+    maxLength: (length, max) => {
+        if (length > max) return false;
+        return true;
+    }
+}
+
 const getCartToken = () => {
     const cartCookie = document.cookie.match(/cart=(\[.*?\])/);
     if (cartCookie) {
@@ -32,10 +61,7 @@ const changeCart = async (infoBook, amount) => {
             if (cartArr[i].id === id) {
                 flag = true;
                 if (cartArr[i].amount + amount <= 0) {
-                    console.log(cartArr[i].amount, amount);
-                    console.log(cartArr);
                     cartArr.splice(i, 1);
-                    console.log(cartArr);
                 } else {
                     cartArr[i].amount += amount;
                 }
@@ -68,35 +94,6 @@ const addProductToCart = async (infoBook, amount) => {
 const removeProductFromCart = async (infoBook) => {
     await changeCart(infoBook, -99999);
     window.location.href = "/user/cart";
-}
-
-
-const Validate = {
-    required: (param) => {
-        if (param === '') return false
-        return true;
-    },
-
-    isNumber: (number) => {
-        if (/^\d+(\.\d+)?$/.test(number)) {
-            return true;
-        }
-        return false;
-    },
-
-    isEmail: (email) => {
-        const regex = /^[a-z\-0-9]+@gmail.com$/
-        if (regex.test(email)) return true;
-        return false;
-    },
-    minLength: (length, min) => {
-        if (length < min) return false;
-        return true;
-    },
-    maxLength: (length, max) => {
-        if (length > max) return false;
-        return true;
-    }
 }
 
 const checkLogin = async () => {
@@ -178,24 +175,31 @@ const logout = async () => {
 }
 
 const parseJwt = (token) => {
-    let base64Url = token.split('.')[1];
-    let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    let jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
+    try {
+        let base64Url = token.split('.')[1];
+        let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        let jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
 
-    return JSON.parse(jsonPayload);
+        return JSON.parse(jsonPayload);
+    } catch {
+        return null;
+    }
 };
 
 const checkTokenEpx = async (token) => {
-    const dateExp = parseJwt(token).exp;
-    if (dateExp - Date.now() / 1000 > 0) {
-        return true;
-    } else {
-        if (await renewToken()) {
+    if (parseJwt(token)) {
+        const dateExp = parseJwt(token).exp;
+        if (dateExp - Date.now() / 1000 > 0) {
             return true;
-        } else return false
+        } else {
+            if (await renewToken()) {
+                return true;
+            } else return false;
+        }
     }
+    return false;
 }
 
 

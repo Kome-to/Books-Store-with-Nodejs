@@ -3,10 +3,16 @@ import { logout, checkLogin, checkTokenEpx, Validate } from './function.js';
 
 const main = async () => {
 
+    // Verify admin
     await checkAdmin();
+
+    // Get all book
     await getAllBook();
+
+    // Get all user
     await getAllUser();
 
+    // Admin's info
     const usernameFieldAdmin = document.querySelector('.container-profile .main-info .username .info');
     const fullNameFieldAdmin = document.querySelector('.container-profile .main-info .full-name .info');
     const addressFieldAdmin = document.querySelector('.container-profile .main-info .address .info');
@@ -14,6 +20,7 @@ const main = async () => {
     const idAdmin = document.querySelector('.container-profile .main-info .id-user');
     const adminArr = [usernameFieldAdmin, fullNameFieldAdmin, addressFieldAdmin, emailFieldAdmin];
 
+    // User's info
     const usernameField = document.querySelector('.user-detail .main-info .username .info');
     const fullNameField = document.querySelector('.user-detail .main-info .full-name .info');
     const addressField = document.querySelector('.user-detail .main-info .address .info');
@@ -21,9 +28,7 @@ const main = async () => {
     const idUser = document.querySelector('.user-detail .main-info .id-user');
     const userArr = [usernameField, fullNameField, addressField, emailField];
 
-    const userOptionText = document.querySelector('.sub-nav .user-nav');
-    const editBt = document.querySelector('.main-info h1 .text-edit');
-
+    // Book's info
     const titleField = document.querySelector('.book-detail .main-info .title .info');
     const authorField = document.querySelector('.book-detail .main-info .author .info');
     const genresField = document.querySelector('.book-detail .main-info .genres .info');
@@ -31,9 +36,17 @@ const main = async () => {
     const idBook = document.querySelector('.book-detail .main-info .id-book');
     const bookArr = [titleField, authorField, genresField, priceField];
 
+    // Edit book button
     const editBook = document.querySelector('.book-detail .main-info h1 .text-edit');
+
+    // Edit user button
     const editUser = document.querySelector('.user-detail .main-info h1 .text-edit');
 
+    // Edit admin button
+    const editBt = document.querySelector('.main-info h1 .text-edit');
+
+    // Dropdown
+    const userOptionText = document.querySelector('.sub-nav .user-nav');
 
     userOptionText.addEventListener('mouseover', () => {
         document.querySelector('.user-option').classList.remove('hidden-action');
@@ -56,7 +69,6 @@ const main = async () => {
     document.querySelector('.container-profile').addEventListener('click', () => {
         let i = 0;
         document.querySelectorAll('.container-profile .main-info .info').forEach(item => {
-            console.log(item);
             if (item.classList.contains('input-field')) {
                 if (item.classList.contains('input-field')) {
                     item.replaceWith(adminArr[i++]);
@@ -71,7 +83,7 @@ const main = async () => {
     })
 
 
-
+    // Load profile
     const loadProfile = async () => {
         const user = await checkLogin();
         usernameFieldAdmin.innerText = user.username;
@@ -80,7 +92,6 @@ const main = async () => {
         emailFieldAdmin.innerText = user.email;
         idAdmin.value = user._id;
     }
-
 
     editBt.addEventListener('click', () => {
         const inputFields = [usernameFieldAdmin, fullNameFieldAdmin, addressFieldAdmin, emailFieldAdmin];
@@ -92,21 +103,21 @@ const main = async () => {
             field.replaceWith(inputField);
         })
         document.querySelector('.main-info .submit-modify').classList.remove('hidden-action');
-        document.querySelector('.avatar-user .upload-avatar').classList.remove('hidden-action');
+        // document.querySelector('.avatar-user .upload-avatar').classList.remove('hidden-action');
     });
 
-    document.querySelector('.avatar-user .upload-avatar').addEventListener('click', () => {
-        const fileInput = document.querySelector('.avatar-user .input-file');
-        fileInput.click();
-        fileInput.addEventListener('change', () => {
-            const file = fileInput.files[0];
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.addEventListener('loadend', () => {
-                document.querySelector('.avatar-user img').src = reader.result;
-            })
-        })
-    })
+    // document.querySelector('.avatar-user .upload-avatar').addEventListener('click', () => {
+    //     const fileInput = document.querySelector('.avatar-user .input-file');
+    //     fileInput.click();
+    //     fileInput.addEventListener('change', () => {
+    //         const file = fileInput.files[0];
+    //         const reader = new FileReader();
+    //         reader.readAsDataURL(file);
+    //         reader.addEventListener('loadend', () => {
+    //             document.querySelector('.avatar-user img').src = reader.result;
+    //         })
+    //     })
+    // })
 
 
     document.querySelector('.container-profile .main-info .submit-modify').addEventListener('click', async () => {
@@ -118,7 +129,7 @@ const main = async () => {
             username,
             fullName,
             address,
-            email);
+            email, 'admin');
     })
 
     document.querySelector('.user-detail .main-info .submit-modify').addEventListener('click', async () => {
@@ -126,11 +137,11 @@ const main = async () => {
         const fullName = document.querySelector('.user-detail .main-info .full-name .info').value;
         const address = document.querySelector('.user-detail .main-info .address .info').value;
         const email = document.querySelector('.user-detail .main-info .email .info').value;
-        await updateUser(idAdmin.value,
+        await updateUser(idUser.value,
             username,
             fullName,
             address,
-            email);
+            email, 'user');
     })
 
     document.querySelector('.user-detail .main-info .submit-add').addEventListener('click', async () => {
@@ -145,25 +156,27 @@ const main = async () => {
             email);
     })
 
-    const updateUser = async (id, username, fullName, address, email) => {
+    const updateUser = async (id, username, fullName, address, email, who) => {
         try {
-            if (await checkTokenEpx(localStorage.getItem('token'))) {
-                const user = {
-                    _id: id,
-                    username: username,
-                    fullName: fullName,
-                    address: address,
-                    email: email,
-                }
-                const res = await fetch('/user/update', {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json', token: localStorage.getItem('token') },
-                    body: JSON.stringify({ user })
-                });
-                if (res.status == 200) {
-                    document.querySelector('.container-profile').classList.add('hidden-action');
-                    document.querySelector('.container-view').click();
-                    window.location.reload();
+            if (validateUser(username, fullName, address, email, who)) {
+                if (await checkTokenEpx(localStorage.getItem('token'))) {
+                    const user = {
+                        _id: id,
+                        username: username,
+                        fullName: fullName,
+                        address: address,
+                        email: email,
+                    }
+                    const res = await fetch('/user/update', {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json', token: localStorage.getItem('token') },
+                        body: JSON.stringify({ user })
+                    });
+                    if (res.status == 200) {
+                        document.querySelector('.container-profile').classList.add('hidden-action');
+                        document.querySelector('.container-view').click();
+                        window.location.reload();
+                    }
                 }
             }
         } catch (err) {
@@ -174,32 +187,30 @@ const main = async () => {
 
     const addUser = async (username, fullName, address, email) => {
         try {
-            if (await checkTokenEpx(localStorage.getItem('token'))) {
-                const user = {
-                    username: username,
-                    fullName: fullName,
-                    address: address,
-                    email: email,
-                }
-                const res = await fetch('admin/users/add', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', token: localStorage.getItem('token') },
-                    body: JSON.stringify({ user })
-                });
-                if (res.status == 200) {
-                    document.querySelector('.container-profile').classList.add('hidden-action');
-                    document.querySelector('.container-view').click();
-                    window.location.reload();
+            if (validateUser(username, fullName, address, email, 'user')) {
+                if (await checkTokenEpx(localStorage.getItem('token'))) {
+                    const user = {
+                        username: username,
+                        fullName: fullName,
+                        address: address,
+                        email: email,
+                    }
+                    const res = await fetch('admin/users/add', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', token: localStorage.getItem('token') },
+                        body: JSON.stringify({ user })
+                    });
+                    if (res.status == 200) {
+                        document.querySelector('.container-profile').classList.add('hidden-action');
+                        document.querySelector('.container-view').click();
+                        window.location.reload();
+                    }
                 }
             }
         } catch (err) {
             console.log(err);
         }
     }
-
-
-
-
 
 
     const searchBooks = async (input) => {
@@ -368,7 +379,7 @@ const main = async () => {
             field.replaceWith(inputField);
         })
         document.querySelector('.user-detail .submit-modify').classList.remove('hidden-action');
-        document.querySelector('.img-user .upload-img-user').classList.remove('hidden-action');
+        // document.querySelector('.img-user .upload-img-user').classList.remove('hidden-action');
         editBook.style.pointerEvents = 'none';
 
         document.querySelector('.container-view').addEventListener('click', () => {
@@ -379,7 +390,7 @@ const main = async () => {
                 item.replaceWith(userArr[i++]);
             });
             document.querySelector('.user-detail .submit-modify').classList.add('hidden-action');
-            document.querySelector('.img-user .upload-img-user').classList.add('hidden-action');
+            // document.querySelector('.img-user .upload-img-user').classList.add('hidden-action');
             editUser.style.pointerEvents = 'visible';
         });
     });
@@ -389,23 +400,25 @@ const main = async () => {
             if (await checkTokenEpx(localStorage.getItem('token'))) {
                 const inputs = document.querySelectorAll('.book-detail .info-content .input-field');
                 const description = document.querySelector('.book-detail .description .description-field').value
-                const book = {
-                    _id: idBook.value,
-                    image: document.querySelector('.book-detail .img-book img').src,
-                    title: inputs[0].value,
-                    author: inputs[1].value,
-                    genres: [...inputs[2].value.split(',')],
-                    price: inputs[3].value,
-                    description: description
-                }
-                const res = await fetch('/admin/books/update', {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json', token: localStorage.getItem('token') },
-                    body: JSON.stringify({ book })
-                });
-                if (res.status == 200) {
-                    document.querySelector('.container-view').click();
-                    window.location.reload();
+                if (validateBook(inputs[0].value, inputs[1].value, inputs[2].value, inputs[3].value)) {
+                    const book = {
+                        _id: idBook.value,
+                        image: document.querySelector('.book-detail .img-book img').src,
+                        title: inputs[0].value,
+                        author: inputs[1].value,
+                        genres: [...inputs[2].value.split(',')],
+                        price: inputs[3].value,
+                        description: description
+                    }
+                    const res = await fetch('/admin/books/update', {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json', token: localStorage.getItem('token') },
+                        body: JSON.stringify({ book })
+                    });
+                    if (res.status == 200) {
+                        document.querySelector('.container-view').click();
+                        window.location.reload();
+                    }
                 }
             }
         } catch (err) {
@@ -435,6 +448,7 @@ const main = async () => {
                     });
                     if (res.status == 200) {
                         document.querySelector('.container-view').click();
+                        window.location.reload();
                     }
                 }
             }
@@ -453,22 +467,26 @@ const main = async () => {
             reader.readAsDataURL(file);
             reader.addEventListener('loadend', () => {
                 document.querySelector('.img-book img').src = reader.result;
+                if (document.querySelector('.img-book img').getAttribute('src') != '') {
+                    document.querySelector('.img-book img').classList.remove('hidden-action');
+                    document.querySelector('.img-book .image-place').classList.add('hidden-action');
+                }
             })
         })
     });
 
-    document.querySelector('.img-user .upload-img-user').addEventListener('click', () => {
-        const fileInput = document.querySelector('.img-user .input-file');
-        fileInput.click();
-        fileInput.addEventListener('change', () => {
-            const file = fileInput.files[0];
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.addEventListener('loadend', () => {
-                document.querySelector('.img-user img').src = reader.result;
-            })
-        })
-    })
+    // document.querySelector('.img-user .upload-img-user').addEventListener('click', () => {
+    //     const fileInput = document.querySelector('.img-user .input-file');
+    //     fileInput.click();
+    //     fileInput.addEventListener('change', () => {
+    //         const file = fileInput.files[0];
+    //         const reader = new FileReader();
+    //         reader.readAsDataURL(file);
+    //         reader.addEventListener('loadend', () => {
+    //             document.querySelector('.img-user img').src = reader.result;
+    //         })
+    //     })
+    // })
 
     document.querySelector('.book-detail .submit-modify').addEventListener('click', async () => {
         await updateBook();
@@ -480,6 +498,8 @@ const main = async () => {
 
     document.querySelector('.container .books .action .add').addEventListener('click', async () => {
         document.querySelector(' .modal-detail .book-detail .img-book img').src = '';
+        document.querySelector('.modal-detail .book-detail .img-book img').classList.add('hidden-action');
+        document.querySelector('.modal-detail .book-detail .img-book .image-place').classList.remove('hidden-action');
         editBook.click();
         document.querySelector('.book-detail .title .input-field').value = '';
         document.querySelector('.book-detail .author .input-field').value = '';
@@ -493,13 +513,18 @@ const main = async () => {
         document.querySelector('.container-view').classList.remove('hidden-action');
         document.querySelector('.container-view .modal-detail').classList.remove('hidden-action');
         document.querySelector('.book-detail').classList.remove('hidden-action');
-        document.querySelector('.container-view').addEventListener('click', () => {
+        const eventListen = () => {
             document.querySelector('.book-detail h1').innerText = 'Book Detail';
             document.querySelector('.book-detail h1').appendChild(editBook);
             document.querySelector('.book-detail .submit-modify').classList.add('hidden-action');
             document.querySelector('.book-detail .submit-add').classList.add('hidden-action');
             document.querySelector('.book-detail').classList.add('hidden-action');
-        });
+            document.querySelector('.modal-detail .book-detail .img-book img').classList.remove('hidden-action');
+            document.querySelector('.modal-detail .book-detail .img-book .image-place').classList.add('hidden-action');
+            document.querySelector('.container-view').click();
+            document.querySelector('.modal-detail').removeEventListener('click', eventListen);
+        }
+        document.querySelector('.modal-detail').addEventListener('click', eventListen);
     });
 
     document.querySelectorAll('.books-list .all-docs .delete').forEach(item => {
@@ -576,13 +601,16 @@ const main = async () => {
         document.querySelector('.container-view').classList.remove('hidden-action');
         document.querySelector('.container-view .modal-detail').classList.remove('hidden-action');
         document.querySelector('.user-detail').classList.remove('hidden-action');
-        document.querySelector('.container-view').addEventListener('click', () => {
+        const eventListen = () => {
             document.querySelector('.user-detail h1').innerText = 'User Detail';
             document.querySelector('.user-detail h1').appendChild(editUser);
             document.querySelector('.user-detail .submit-modify').classList.add('hidden-action');
             document.querySelector('.user-detail .submit-add').classList.add('hidden-action');
             document.querySelector('.user-detail').classList.add('hidden-action');
-        });
+            document.querySelector('.container-view').click();
+            document.querySelector('.modal-detail').removeEventListener('click', eventListen);
+        }
+        document.querySelector('.modal-detail').addEventListener('click', eventListen);
     });
 
     document.querySelector('.container-view').addEventListener('click', () => {
@@ -594,6 +622,10 @@ const main = async () => {
         document.querySelector('.container-view .modal-detail .book-detail').classList.add('hidden-action');
         document.querySelector('.container-view .modal-detail .user-detail').classList.add('hidden-action');
     });
+
+    document.querySelector('.container-view .modal-detail').addEventListener('click', (e) => {
+        e.stopPropagation();
+    })
 
     document.querySelector('.container-view .books-list').addEventListener('click', (e) => {
         e.stopPropagation();
@@ -611,6 +643,10 @@ const main = async () => {
         e.stopPropagation();
     });
 
+
+    document.querySelector('.modal-detail').addEventListener('click', () => {
+        document.querySelector('.modal-detail').classList.add('hidden-action');
+    });
 
 }
 
@@ -690,9 +726,12 @@ const checkAdmin = async () => {
                 document.querySelector('.user-option').classList.remove('login-required');
                 document.querySelector('.login .fa-angle-down').classList.remove('hidden-action');
                 welcome.classList.remove('hidden-action');
+                document.querySelector('.container-profile .main-info .id-user').value = data.admin._id;
             } else {
-                window.location.href = '/access-denied';
+                window.location.replace('/');
             }
+        } else {
+            window.location.replace('/');
         }
     } catch (err) {
         console.log(err);
@@ -738,7 +777,7 @@ const getAllUser = async () => {
     }
 }
 
-// Validate
+// Validate Book
 const validateBook = (title, author, genres, price) => {
     let flag = 1;
     price = price.split('$')[0].trim();
@@ -798,6 +837,153 @@ const validateBook = (title, author, genres, price) => {
             document.querySelector('.book-detail .main-info .price .error-validate').classList.remove('hidden-action');
         } else {
             document.querySelector('.book-detail .main-info .price .error-validate').classList.add('hidden-action');
+        }
+    }
+
+    return flag;
+}
+
+// Validate User
+const validateUser = (username, fullName, address, email, who) => {
+    let flag = 1;
+
+    if (who === 'user') {
+
+        // username
+        if (!Validate.required(username)) {
+            flag = 0;
+            document.querySelector('.user-detail .main-info .username .error-validate').innerText =
+                'Username is required';
+            document.querySelector('.user-detail .main-info .username .error-validate').classList.remove('hidden-action');
+        } else {
+            if (!Validate.minLength(username.length, 6) || !Validate.maxLength(username.length, 20)) {
+                flag = 0;
+                document.querySelector('.user-detail .main-info .username .error-validate').innerText =
+                    'Username must contain between 6 and 20 characters';
+                document.querySelector('.user-detail .main-info .username .error-validate').classList.remove('hidden-action');
+            } else {
+                document.querySelector('.user-detail .main-info .username .error-validate').classList.add('hidden-action');
+            }
+        }
+
+        // full name
+        if (!Validate.required(fullName)) {
+            flag = 0;
+            document.querySelector('.user-detail .main-info .full-name .error-validate').innerText =
+                'Full name is required';
+            document.querySelector('.user-detail .main-info .full-name .error-validate').classList.remove('hidden-action');
+        } else {
+            if (!Validate.minLength(fullName.length, 6) || !Validate.maxLength(fullName.length, 20)) {
+                flag = 0;
+                document.querySelector('.user-detail .main-info .full-name .error-validate').innerText =
+                    'Full name must contain between 6 and 40 characters';
+                document.querySelector('.user-detail .main-info .full-name .error-validate').classList.remove('hidden-action');
+            } else {
+                document.querySelector('.user-detail .main-info .full-name .error-validate').classList.add('hidden-action');
+            }
+        }
+
+        // address
+        if (!Validate.required(address)) {
+            flag = 0;
+            document.querySelector('.user-detail .main-info .address .error-validate').innerText =
+                'Address is required';
+            document.querySelector('.user-detail .main-info .address .error-validate').classList.remove('hidden-action');
+        } else {
+            if (!Validate.minLength(address.length, 6) || !Validate.maxLength(address.length, 20)) {
+                flag = 0;
+                document.querySelector('.user-detail .main-info .address .error-validate').innerText =
+                    'Address must contain between 6 and 200 characters';
+                document.querySelector('.user-detail .main-info .address .error-validate').classList.remove('hidden-action');
+            } else {
+                document.querySelector('.user-detail .main-info .address .error-validate').classList.add('hidden-action');
+            }
+        }
+
+        // email
+        if (!Validate.required(email)) {
+            flag = 0;
+            document.querySelector('.user-detail .main-info .email .error-validate').innerText =
+                'Email is required';
+            document.querySelector('.user-detail .main-info .email .error-validate').classList.remove('hidden-action');
+        } else {
+            if (!Validate.isEmail(email)) {
+                flag = 0;
+                document.querySelector('.user-detail .main-info .email .error-validate').innerText =
+                    'Email invalid';
+                document.querySelector('.user-detail .main-info .email .error-validate').classList.remove('hidden-action');
+            } else {
+                document.querySelector('.user-detail .main-info .email .error-validate').classList.add('hidden-action');
+            }
+        }
+
+    } else {
+        // username
+        if (!Validate.required(username)) {
+            flag = 0;
+            document.querySelector('.container-profile .main-info .username .error-validate').innerText =
+                'Username is required';
+            document.querySelector('.container-profile .main-info .username .error-validate').classList.remove('hidden-action');
+        } else {
+            if (!Validate.minLength(username.length, 6) || !Validate.maxLength(username.length, 20)) {
+                flag = 0;
+                document.querySelector('.container-profile .main-info .username .error-validate').innerText =
+                    'Username must contain between 6 and 20 characters';
+                document.querySelector('.container-profile .main-info .username .error-validate').classList.remove('hidden-action');
+            } else {
+                document.querySelector('.container-profile .main-info .username .error-validate').classList.add('hidden-action');
+            }
+        }
+
+        // full name
+        if (!Validate.required(fullName)) {
+            flag = 0;
+            document.querySelector('.container-profile .main-info .full-name .error-validate').innerText =
+                'Full name is required';
+            document.querySelector('.container-profile .main-info .full-name .error-validate').classList.remove('hidden-action');
+        } else {
+            if (!Validate.minLength(fullName.length, 6) || !Validate.maxLength(fullName.length, 20)) {
+                flag = 0;
+                document.querySelector('.container-profile .main-info .full-name .error-validate').innerText =
+                    'Full name must contain between 6 and 40 characters';
+                document.querySelector('.container-profile .main-info .full-name .error-validate').classList.remove('hidden-action');
+            } else {
+                document.querySelector('.container-profile .main-info .full-name .error-validate').classList.add('hidden-action');
+            }
+        }
+
+        // address
+        if (!Validate.required(address)) {
+            flag = 0;
+            document.querySelector('.container-profile .main-info .address .error-validate').innerText =
+                'Address is required';
+            document.querySelector('.container-profile .main-info .address .error-validate').classList.remove('hidden-action');
+        } else {
+            if (!Validate.minLength(address.length, 6) || !Validate.maxLength(address.length, 20)) {
+                flag = 0;
+                document.querySelector('.container-profile .main-info .address .error-validate').innerText =
+                    'Address must contain between 6 and 200 characters';
+                document.querySelector('.container-profile .main-info .address .error-validate').classList.remove('hidden-action');
+            } else {
+                document.querySelector('.container-profile .main-info .address .error-validate').classList.add('hidden-action');
+            }
+        }
+
+        // email
+        if (!Validate.required(email)) {
+            flag = 0;
+            document.querySelector('.container-profile .main-info .email .error-validate').innerText =
+                'Email is required';
+            document.querySelector('.container-profile .main-info .email .error-validate').classList.remove('hidden-action');
+        } else {
+            if (!Validate.isEmail(email)) {
+                flag = 0;
+                document.querySelector('.container-profile .main-info .email .error-validate').innerText =
+                    'Email invalid';
+                document.querySelector('.container-profile .main-info .email .error-validate').classList.remove('hidden-action');
+            } else {
+                document.querySelector('.container-profile .main-info .email .error-validate').classList.add('hidden-action');
+            }
         }
     }
 

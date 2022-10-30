@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
+// General access token
 const generalAccessToken = (data) => {
     const token = jwt.sign({
         // username: data.username,
@@ -12,6 +13,7 @@ const generalAccessToken = (data) => {
     return token;
 }
 
+// General refresh token
 const generalRefreshToken = (data) => {
     const token = jwt.sign({
         // username: data.username,
@@ -20,6 +22,7 @@ const generalRefreshToken = (data) => {
     return token;
 }
 
+// Merge user's cart and anonymous's cart
 const mergeCart = (anonymous = '[]', user = '[]') => {
     const anonymousCart = JSON.parse(anonymous);
     const userCart = JSON.parse(user);
@@ -32,6 +35,7 @@ const mergeCart = (anonymous = '[]', user = '[]') => {
     return JSON.stringify(userCart);
 }
 
+// Register
 const registerUser = async (req, res) => {
     try {
         const data = req.body.user;
@@ -51,7 +55,7 @@ const registerUser = async (req, res) => {
     }
 }
 
-
+// Login
 const loginUser = async (req, res) => {
     try {
         const data = req.body.user;
@@ -87,6 +91,7 @@ const loginUser = async (req, res) => {
     }
 }
 
+// Get user's info login
 const loadUser = (req, res) => {
     try {
         const user = req.user;
@@ -96,6 +101,7 @@ const loadUser = (req, res) => {
     }
 }
 
+// Log out
 const logoutUser = async (req, res) => {
     try {
         res.cookie('refreshToken', 'destroy', { expires: new Date(Date.now()), httpOnly: true });
@@ -107,6 +113,7 @@ const logoutUser = async (req, res) => {
     }
 }
 
+// Renew token
 const createNewToken = async (req, res) => {
     const refreshToken = req.cookies.refreshToken;
     jwt.verify(refreshToken, process.env.SECRET_REFRESH_KEY, async (err, decoded) => {

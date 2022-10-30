@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const Users = require('../models/users');
 
+
+// Verify user
 const verifyAccessToken = async (req, res, next) => {
     const accessToken = req.headers.token;
     jwt.verify(accessToken, process.env.SECRET_ACCESS_KEY, async (err, decoded) => {
@@ -34,6 +36,7 @@ const verifyAccessToken = async (req, res, next) => {
 
 }
 
+// Verify admin
 const verifyAdmin = async (req, res, next) => {
     verifyAccessToken(req, res, () => {
         if (req.user.admin) {

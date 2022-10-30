@@ -2,6 +2,7 @@ const Books = require('../models/books');
 const Users = require('../models/users');
 
 
+// Get homepage
 const getHomePage = async (req, res) => {
     const books = await Books.find({});
     let bestSeller = [], newRelease = [];
@@ -19,35 +20,28 @@ const getHomePage = async (req, res) => {
     return res.render('homePage.ejs', { books, bestSeller, newRelease, user: req.user });
 }
 
+// Get book page
 const getBooksPage = async (req, res) => {
     const books = await Books.find({});
     return res.render('booksPage.ejs', { books: books });
 }
 
-const searchBooks = async (req, res) => {
-    try {
-        const input = req.body.input.toLowerCase();
-        let books = await Books.find({});
-        books = books.filter(book => book.title.toLowerCase().indexOf(input) === 0);
-        return res.status(200).json(books);
-    } catch (err) {
-        console.log(err);
-        return res.status(500).json(err);
-    }
-}
-
+// Get about page
 const getAboutPage = async (req, res) => {
     return res.render('aboutPage.ejs');
 }
 
+// Get login page
 const getLoginPage = async (req, res) => {
     return res.render('loginPage.ejs');
 }
 
+// Get register page
 const getRegisterPage = async (req, res) => {
     return res.render('registerPage.ejs');
 }
 
+// Get book detail page
 const getDetailPage = async (req, res) => {
     try {
         const _id = req.params.id;
@@ -68,6 +62,7 @@ const getDetailPage = async (req, res) => {
     }
 }
 
+// Get cart page
 const getCartPage = async (req, res) => {
     try {
         let books = [], productAmount = [];
@@ -90,10 +85,25 @@ const getCartPage = async (req, res) => {
 
 }
 
+// Search book by title
+const searchBooks = async (req, res) => {
+    try {
+        const input = req.body.input.toLowerCase();
+        let books = await Books.find({});
+        books = books.filter(book => book.title.toLowerCase().indexOf(input) === 0);
+        return res.status(200).json(books);
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json(err);
+    }
+}
+
+// View profile
 const viewProfile = async (req, res) => {
     return res.render('profilePage.ejs');
 }
 
+// Update user's info
 const updateUser = async (req, res) => {
     try {
         const user = req.body.user;
@@ -110,6 +120,7 @@ const updateUser = async (req, res) => {
     }
 }
 
+//Get order's info
 const getOrderInfo = async (req, res) => {
     try {
         const orders = req.body.order;
@@ -129,6 +140,7 @@ const getOrderInfo = async (req, res) => {
     }
 }
 
+// Search book by price
 const searchByPrice = async (req, res) => {
     try {
         const prices = req.body.prices;
@@ -145,6 +157,7 @@ const searchByPrice = async (req, res) => {
     }
 }
 
+// Search book by genres
 const searchByGenres = async (req, res) => {
     try {
         const genre = req.body.genre;
@@ -158,6 +171,7 @@ const searchByGenres = async (req, res) => {
     }
 }
 
+// Checkout cart
 const checkout = async (req, res) => {
     try {
         const date = new Date();
@@ -180,6 +194,7 @@ const checkout = async (req, res) => {
     }
 }
 
+//Update user's cart in database
 const updateCart = async (req, res) => {
     try {
         await Users.findByIdAndUpdate(req.user._id, { cart: req.body.cart });

@@ -36,7 +36,10 @@
                 <br>
                 <div class="genres-detail">Genres: 
                     <% for (let i =0; i <book.genres.length;  i++ ) { %>
-                        <a href="#"><%= book.genres[i]%></a>,
+                        <span class="genre"><%= book.genres[i]%></span>
+                        <% if(i < book.genres.length-1){ %>
+                            ,
+                         <% } %>
                     <%}%>
                 </div>
                 <br>
@@ -63,9 +66,7 @@
                     &quot;price&quot;   : &quot;<%=book.price%>&quot;}">
             </div>
         </div>
-        <br><br><br>
-        <hr>
-        <br><br>
+
         <div class="relate-book">
             <h1>Relations</h1>
             <div class="books">

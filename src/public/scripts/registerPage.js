@@ -63,8 +63,3 @@ bt.addEventListener('click', () => {
         document.querySelector('.modal-register').classList.remove('hidden-action');
     }
 })
-
-
-
-
-

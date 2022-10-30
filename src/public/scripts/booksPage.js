@@ -1,4 +1,4 @@
-import { addProductToCart, loadUser } from './function.js';
+import { addProductToCart } from './function.js';
 
 
 
