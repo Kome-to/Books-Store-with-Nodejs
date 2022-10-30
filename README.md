@@ -20,4 +20,4 @@
 <li>Admin can view admin page to manage books and users</li>
 
 <br>
-Deploy app : http://anilife.tk/
+Demo app : http://anilife.tk/
