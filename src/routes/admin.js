@@ -18,6 +18,7 @@ const adminRouter = (app) => {
     router.post('/users/add', verifyAdmin, adminControllers.addUser);
     router.put('/users/detail', verifyAdmin, adminControllers.detailUser);
     router.delete('/users/delete', verifyAdmin, adminControllers.deleteUser);
+    router.post('/users/search', verifyAdmin, adminControllers.searchUser);
 
     return app.use('/admin', router);
 }

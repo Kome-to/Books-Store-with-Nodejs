@@ -4,7 +4,6 @@ import { addProductToCart } from './function.js';
 
 document.querySelector('.nav-bar .li-book').classList.add('active');
 
-
 document.querySelector('.keep-shopping').addEventListener('click', () => {
     document.querySelector('.modal-add-product-to-cart').classList.add('hidden-action');
 })
@@ -112,6 +111,12 @@ const searchByGenres = async (genre) => {
         console.log(err);
     }
 
+}
+
+const genre = localStorage.getItem('genre')
+if (genre) {
+    searchByGenres(genre);
+    localStorage.setItem('genre', '');
 }
 
 document.querySelectorAll('.genres li').forEach(item => {

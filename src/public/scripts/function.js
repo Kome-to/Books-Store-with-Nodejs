@@ -118,14 +118,19 @@ const checkLogin = async () => {
 }
 
 const renewToken = async () => {
-    const res = await fetch('/user/refresh', {
-        method: 'GET',
-    })
-    if (res.status === 200) {
-        const data = await res.json();
-        localStorage.setItem('token', data.accessToken);
-        return true;
-    } else return false;
+    try {
+        const res = await fetch('/user/refresh', {
+            method: 'GET',
+        })
+        if (res.status === 200) {
+            const data = await res.json();
+            localStorage.setItem('token', data.accessToken);
+            return true;
+        } else
+            return false;
+    } catch (err) {
+        return false;
+    }
 }
 
 const loadUser = async () => {

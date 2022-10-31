@@ -43,4 +43,13 @@ books.forEach(book => {
         const infoBook = book.children[7].value;
         await addProductToCart(infoBook, 1);
     })
-})
+});
+
+const genres = document.querySelectorAll('.description-detail .genres-detail .genre');
+
+genres.forEach(genre => {
+    genre.addEventListener('click', (e) => {
+        localStorage.setItem('genre', genre.innerText);
+        window.location.href = '/books';
+    });
+});

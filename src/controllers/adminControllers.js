@@ -161,17 +161,29 @@ const deleteUser = async (req, res) => {
     }
 }
 
+const searchUser = async (req, res) => {
+    try {
+        const input = req.body.input.toLowerCase();
+        let users = await Users.find({});
+        users = users.filter(book => book.username.toLowerCase().indexOf(input) === 0);
+        return res.status(200).json(users);
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json(err);
+    }
+}
+
 module.exports = {
     getAdminPage,
     checkAdmin,
     getAllBooks,
     updateBook,
     detailBook,
+    deleteBook,
     addBook,
     getAllUsers,
-    // updateUser,
     detailUser,
     addUser,
     deleteUser,
-    deleteBook
+    searchUser
 }

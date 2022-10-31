@@ -213,6 +213,7 @@ const main = async () => {
     }
 
 
+    // Search Books
     const searchBooks = async (input) => {
         try {
             const res = await fetch('/books/search',
@@ -230,18 +231,53 @@ const main = async () => {
         }
     }
 
-    document.querySelector('.searchTerm').addEventListener('keyup', async (e) => {
-        const input = document.querySelector('.searchTerm').value;
+    document.querySelector('.books-list .searchTerm').addEventListener('keyup', async (e) => {
+        const input = document.querySelector('.books-list .searchTerm').value;
         if (e.key === 'Enter' || e.keyCode === 13) {
             await searchBooks(input);
         }
     });
 
-    document.querySelector('.searchButton').addEventListener('click', async () => {
-        const input = document.querySelector('.searchTerm').value.toLowerCase();
+    document.querySelector('.books-list .searchButton').addEventListener('click', async () => {
+        const input = document.querySelector('.books-list .searchTerm').value.toLowerCase();
         await searchBooks(input);
     });
 
+    // Search Users
+    const searchUsers = async (input) => {
+        try {
+            const access = await checkTokenEpx(localStorage.getItem('token'));
+            if (access) {
+                const res = await fetch('admin/users/search',
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'token': localStorage.getItem('token')
+                        },
+                        body: JSON.stringify({ input: input.toLowerCase() }),
+                    })
+                const data = await res.json();
+                displayUsers(data);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    document.querySelector('.users-list .searchTerm').addEventListener('keyup', async (e) => {
+        const input = document.querySelector('.users-list .searchTerm').value;
+        if (e.key === 'Enter' || e.keyCode === 13) {
+            await searchUsers(input);
+        }
+    });
+
+    document.querySelector('.users-list .searchButton').addEventListener('click', async () => {
+        const input = document.querySelector('.users-list .searchTerm').value.toLowerCase();
+        await searchUsers(input);
+    });
+
+    // Get Book Detail
     const getBookDetail = async (id) => {
         try {
             const accept = await checkTokenEpx(localStorage.getItem('token'));
