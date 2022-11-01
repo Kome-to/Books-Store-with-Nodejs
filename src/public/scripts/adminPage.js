@@ -26,6 +26,7 @@ const main = async () => {
     const addressField = document.querySelector('.user-detail .main-info .address .info');
     const emailField = document.querySelector('.user-detail .main-info .email .info');
     const idUser = document.querySelector('.user-detail .main-info .id-user');
+    const orderUser = document.querySelector('.user-detail .main-info .order-user');
     const userArr = [usernameField, fullNameField, addressField, emailField];
 
     // Book's info
@@ -321,6 +322,8 @@ const main = async () => {
     }
 
     document.querySelector('.container .books .action .view').addEventListener('click', async () => {
+        editBook.style.pointerEvents = 'visible';
+        document.querySelector('.show-order').classList.add('hidden-action');
         document.querySelector('.container-view').classList.remove('hidden-action');
         document.querySelector('.container-view .books-list').classList.remove('hidden-action');
         const books = document.querySelectorAll('.container-view .books-list .all-docs .book');
@@ -330,6 +333,9 @@ const main = async () => {
                 const id = book.querySelector('.id-book').value;
                 const bookData = await getBookDetail(id);
                 if (bookData) {
+                    document.querySelectorAll('.error-validate').forEach(item => {
+                        item.classList.add('hidden-action');
+                    })
                     bookDetail.querySelector('.img-book img').src = `${bookData.image}`;
                     bookDetail.querySelector('.info-content .title .info').innerText = `${bookData.title}`;
                     bookDetail.querySelector('.info-content .author .info').innerText = `${bookData.author}`;
@@ -347,6 +353,7 @@ const main = async () => {
 
 
     document.querySelector('.container .users .action .view').addEventListener('click', async () => {
+        editUser.style.pointerEvents = 'visible';
         document.querySelector('.container-view').classList.remove('hidden-action');
         document.querySelector('.container-view .users-list').classList.remove('hidden-action');
         const users = document.querySelectorAll('.container-view .users-list .all-docs .user');
@@ -356,6 +363,11 @@ const main = async () => {
                 const id = user.querySelector('.id-user').value;
                 const userData = await getUserDetail(id);
                 if (userData) {
+                    document.querySelectorAll('.error-validate').forEach(item => {
+                        item.classList.add('hidden-action');
+                    })
+                    document.querySelector('.show-order').classList.remove('hidden-action');
+                    userDetail.querySelector('.info-content .order-user').value = JSON.stringify(userData.orderSuccess);
                     userDetail.querySelector('.info-content .username .info').innerText = `${userData.username}`;
                     userDetail.querySelector('.info-content .full-name .info').innerText = `${userData.fullName}`;
                     userDetail.querySelector('.info-content .email .info').innerText = `${userData.email}`;
@@ -386,7 +398,7 @@ const main = async () => {
         document.querySelector('.book-detail .submit-modify').classList.remove('hidden-action');
         document.querySelector('.img-book .upload-img-book').classList.remove('hidden-action');
         editBook.style.pointerEvents = 'none';
-        document.querySelector('.container-view').addEventListener('click', () => {
+        document.querySelector('.modal-detail').addEventListener('click', () => {
             let i = 0;
             document.querySelectorAll('.book-detail .info-content .info').forEach(item => {
                 if (!item.parentElement.classList.contains('amount-sold')) {
@@ -418,7 +430,7 @@ const main = async () => {
         // document.querySelector('.img-user .upload-img-user').classList.remove('hidden-action');
         editBook.style.pointerEvents = 'none';
 
-        document.querySelector('.container-view').addEventListener('click', () => {
+        document.querySelector('.modal-detail').addEventListener('click', () => {
             let i = 0;
             document.querySelectorAll('.user-detail .info-content .info').forEach(item => {
 
@@ -533,6 +545,7 @@ const main = async () => {
     });
 
     document.querySelector('.container .books .action .add').addEventListener('click', async () => {
+        document.querySelector('.show-order').classList.add('hidden-action');
         document.querySelector(' .modal-detail .book-detail .img-book img').src = '';
         document.querySelector('.modal-detail .book-detail .img-book img').classList.add('hidden-action');
         document.querySelector('.modal-detail .book-detail .img-book .image-place').classList.remove('hidden-action');
@@ -626,12 +639,14 @@ const main = async () => {
     })
 
     document.querySelector('.container .users .action .add').addEventListener('click', async () => {
+        document.querySelector('.show-order').classList.add('hidden-action');
         editUser.click();
         document.querySelector('.user-detail .username .input-field').value = '';
         document.querySelector('.user-detail .full-name .input-field').value = '';
         document.querySelector('.user-detail .address .input-field').value = '';
         document.querySelector('.user-detail .email .input-field').value = '';
         document.querySelector('.user-detail h1').innerText = 'Add User';
+        document.querySelector('.show-order').classList.add('hidden-action');
         document.querySelector('.user-detail .submit-modify').classList.add('hidden-action');
         document.querySelector('.user-detail .submit-add').classList.remove('hidden-action');
         document.querySelector('.container-view').classList.remove('hidden-action');
@@ -684,10 +699,105 @@ const main = async () => {
         document.querySelector('.modal-detail').classList.add('hidden-action');
     });
 
+    // Show order success
+    document.querySelector('.show-order').addEventListener('click', async (e) => {
+        e.stopPropagation();
+        document.querySelector('.order-success').innerHTML = '<h1>Order Success</h1>';
+        document.querySelector('.wrap-order').classList.remove('hidden-action');
+        let order = document.querySelector('.user-detail .order-user').value;
+        order = JSON.parse(order);
+        await loadOrder(order);
+    })
+
+    document.querySelector('.wrap-order').addEventListener('click', (e) => {
+        e.stopPropagation();
+        document.querySelector('.wrap-order').classList.add('hidden-action');
+    })
+
 }
 
 
 //fetch API
+
+const getOrderInfo = async (order) => {
+    try {
+        if (await checkTokenEpx(localStorage.getItem('token'))) {
+            const res = await fetch('/user/order-success', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json', token: localStorage.getItem('token') },
+                body: JSON.stringify({ order })
+            })
+            if (res.status == 200) {
+                const data = await res.json();
+                return data.orderSuccess;
+            } else return null
+        }
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+const loadOrder = async (order) => {
+    const orderSuccess = await getOrderInfo(order);
+    if (orderSuccess.length <= 0) {
+        const empty = document.createElement('div');
+        empty.className = 'empty';
+        empty.innerText = 'Empty';
+        document.querySelector('.order-success').appendChild(empty);
+    }
+    orderSuccess.forEach(item => {
+        const orderContent = document.createElement('div');
+        orderContent.className = 'order-content';
+        document.querySelector('.order-success').appendChild(orderContent);
+        const order = item.order;
+        const date = new Date(JSON.parse(item.date));
+        const dateOrder = document.createElement('div');
+        dateOrder.className = 'date-order';
+        let minutes = date.getMinutes();
+        if (minutes < 10) {
+            minutes = '0' + minutes;
+        }
+        let address = '';
+        if (document.querySelector('.user-detail .main-info .address .info').value) {
+            address = document.querySelector('.user-detail .main-info .address .info').value;
+        } else {
+            address = document.querySelector('.user-detail .main-info .address .info').innerText;
+        }
+        dateOrder.innerText =
+            `Time:  ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}  ${date.getHours()}:${minutes}\t\tAddress: ${address}`;
+        orderContent.appendChild(dateOrder);
+        const totalPrice = document.createElement('div');
+        totalPrice.className = 'total';
+        let total = 0;
+        order.forEach(prt => {
+            const product = document.createElement('div');
+            product.className = 'product';
+            orderContent.appendChild(product);
+            const img = document.createElement('div');
+            const title = document.createElement('div');
+            title.innerText = prt.title;
+            const amount = document.createElement('div');
+            amount.innerText = `x ${prt.amount}`;
+            const price = document.createElement('div');
+            price.innerText = `${prt.price} $`;
+            total += Number.parseInt(prt.price) * prt.amount;
+            img.className = 'img';
+            const imgTag = document.createElement('img');
+            imgTag.src = prt.image;
+            img.appendChild(imgTag);
+            title.className = 'title';
+            amount.className = 'amount';
+            price.className = 'price';
+            product.appendChild(img);
+            product.appendChild(title);
+            product.appendChild(amount);
+            product.appendChild(price);
+        });
+        totalPrice.innerText = `Paid : ${total} $`;
+        orderContent.appendChild(totalPrice);
+    });
+}
+
 const displayBooks = (books) => {
     document.querySelector('.books-list .all-docs').innerHTML = '';
     books.forEach(book => {

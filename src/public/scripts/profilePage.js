@@ -5,7 +5,7 @@ const fullNameField = document.querySelector('.main-info .full-name .info');
 const addressField = document.querySelector('.main-info .address .info');
 const emailField = document.querySelector('.main-info .email .info');
 const idUser = document.querySelector('.main-info .id-user');
-const orderSuccessField = document.querySelector('.container .order-success .order-content');
+// const orderSuccessField = document.querySelector('.container .order-success .order-content');
 
 const loadProfile = async () => {
     const user = await checkLogin();
