@@ -21,3 +21,8 @@
 
 <br>
 Demo app : http://anilife.tk/
+
+<h2> Admin account </h2>
+Username :admin123 
+<br>
+Password : admin123
